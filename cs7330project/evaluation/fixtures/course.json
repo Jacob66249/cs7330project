@@ -1,0 +1,92 @@
+[
+  {
+    "model": "university.course",
+    "pk": 1,
+    "fields": {
+      "course_id": "1000",
+      "dept": "COMP",
+      "title": "CS 1",
+      "description": "Intro to Programming I"
+    }
+  },
+  {
+    "model": "university.course",
+    "pk": 2,
+    "fields": {
+      "course_id": "1100",
+      "dept": "COMP",
+      "title": "CS 2",
+      "description": "Intro to Programming II"
+    }
+  },
+  {
+    "model": "university.course",
+    "pk": 3,
+    "fields": {
+      "course_id": "1200",
+      "dept": "COMP",
+      "title": "CS 3",
+      "description": "Object-Oriented Design"
+    }
+  },
+  {
+    "model": "university.course",
+    "pk": 4,
+    "fields": {
+      "course_id": "2000",
+      "dept": "COMP",
+      "title": "Data Structures",
+      "description": "Basic Data Structures"
+    }
+  },
+  {
+    "model": "university.course",
+    "pk": 5,
+    "fields": {
+      "course_id": "3000",
+      "dept": "COMP",
+      "title": "Algorithm",
+      "description": "Design and Analysis of Algorithms"
+    }
+  },
+  {
+    "model": "university.course",
+    "pk": 6,
+    "fields": {
+      "course_id": "1000",
+      "dept": "BSKW",
+      "title": "Basics of Basket Weaving",
+      "description": "Introduction to Basket Weaving"
+    }
+  },
+  {
+    "model": "university.course",
+    "pk": 7,
+    "fields": {
+      "course_id": "1010",
+      "dept": "BSKW",
+      "title": "Baskets of the World",
+      "description": "Analysis of Basket Weaving around the World"
+    }
+  },
+  {
+    "model": "university.course",
+    "pk": 8,
+    "fields": {
+      "course_id": "2020",
+      "dept": "BSKW",
+      "title": "History of Basket Weaving",
+      "description": "Early History of Basket Weaving"
+    }
+  },
+  {
+    "model": "university.course",
+    "pk": 9,
+    "fields": {
+      "course_id": "3000",
+      "dept": "BSKW",
+      "title": "Newtonian Physics as applied to Basket Weaving",
+      "description": "Analysis of Basket Weaving Physics"
+    }
+  }
+]

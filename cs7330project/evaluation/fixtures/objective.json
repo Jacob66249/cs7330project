@@ -1,0 +1,42 @@
+[
+  {
+    "model": "university.objective",
+    "pk": 1,
+    "fields": {
+      "code": "LO197",
+      "title": "Learning Objective 1"
+    }
+  },
+  {
+    "model": "university.objective",
+    "pk": 2,
+    "fields": {
+      "code": "LO159",
+      "title": "Learning Objective 2"
+    }
+  },
+  {
+    "model": "university.objective",
+    "pk": 3,
+    "fields": {
+      "code": "LO254",
+      "title": "Learning Objective 3"
+    }
+  },
+  {
+    "model": "university.objective",
+    "pk": 4,
+    "fields": {
+      "code": "LO148",
+      "title": "Learning Objective 4"
+    }
+  },
+  {
+    "model": "university.objective",
+    "pk": 5,
+    "fields": {
+      "code": "LO294",
+      "title": "Learning Objective 5"
+    }
+  }
+]

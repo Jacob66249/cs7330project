@@ -1,0 +1,290 @@
+[
+  {
+    "model": "university.section",
+    "pk": 1,
+    "fields": {
+      "code": "003",
+      "semester": 1,
+      "year": 2023,
+      "prof": "0002",
+      "course": 1,
+      "enrolled": 10
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 2,
+    "fields": {
+      "code": "002",
+      "semester": 1,
+      "year": 2023,
+      "prof": "0006",
+      "course": 1,
+      "enrolled": 10
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 3,
+    "fields": {
+      "code": "001",
+      "semester": 3,
+      "year": 2023,
+      "prof": "0002",
+      "course": 1,
+      "enrolled": 10
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 4,
+    "fields": {
+      "code": "002",
+      "semester": 3,
+      "year": 2023,
+      "prof": "0007",
+      "course": 1,
+      "enrolled": 10
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 5,
+    "fields": {
+      "code": "001",
+      "semester": 1,
+      "year": 2023,
+      "prof": "0002",
+      "course": 2,
+      "enrolled": 10
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 6,
+    "fields": {
+      "code": "001",
+      "semester": 1,
+      "year": 2023,
+      "prof": "0016",
+      "course": 6,
+      "enrolled": 10
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 7,
+    "fields": {
+      "code": "001",
+      "semester": 2,
+      "year": 2023,
+      "prof": "0015",
+      "course": 6,
+      "enrolled": 10
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 8,
+    "fields": {
+      "code": "001",
+      "semester": 3,
+      "year": 2023,
+      "prof": "0015",
+      "course": 6,
+      "enrolled": 10
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 9,
+    "fields": {
+      "code": "001",
+      "semester": 1,
+      "year": 2023,
+      "prof": "0013",
+      "course": 7,
+      "enrolled": 20
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 10,
+    "fields": {
+      "code": "001",
+      "semester": 2,
+      "year": 2023,
+      "prof": "0014",
+      "course": 7,
+      "enrolled": 10
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 11,
+    "fields": {
+      "code": "001",
+      "semester": 3,
+      "year": 2023,
+      "prof": "0018",
+      "course": 7,
+      "enrolled": 20
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 12,
+    "fields": {
+      "code": "001",
+      "semester": 1,
+      "year": 2023,
+      "prof": "0017",
+      "course": 8,
+      "enrolled": 30
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 13,
+    "fields": {
+      "code": "001",
+      "semester": 3,
+      "year": 2023,
+      "prof": "0018",
+      "course": 9,
+      "enrolled": 30
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 14,
+    "fields": {
+      "code": "001",
+      "semester": 3,
+      "year": 2023,
+      "prof": "0005",
+      "course": 2,
+      "enrolled": 20
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 15,
+    "fields": {
+      "code": "002",
+      "semester": 1,
+      "year": 2023,
+      "prof": "0004",
+      "course": 2,
+      "enrolled": 20
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 16,
+    "fields": {
+      "code": "002",
+      "semester": 3,
+      "year": 2023,
+      "prof": "0008",
+      "course": 2,
+      "enrolled": 20
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 17,
+    "fields": {
+      "code": "001",
+      "semester": 1,
+      "year": 2023,
+      "prof": "0002",
+      "course": 3,
+      "enrolled": 20
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 18,
+    "fields": {
+      "code": "002",
+      "semester": 1,
+      "year": 2023,
+      "prof": "0006",
+      "course": 3,
+      "enrolled": 30
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 19,
+    "fields": {
+      "code": "001",
+      "semester": 3,
+      "year": 2023,
+      "prof": "0009",
+      "course": 3,
+      "enrolled": 20
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 20,
+    "fields": {
+      "code": "002",
+      "semester": 3,
+      "year": 2023,
+      "prof": "0005",
+      "course": 3,
+      "enrolled": 30
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 21,
+    "fields": {
+      "code": "001",
+      "semester": 1,
+      "year": 2023,
+      "prof": "0007",
+      "course": 4,
+      "enrolled": 40
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 22,
+    "fields": {
+      "code": "001",
+      "semester": 3,
+      "year": 2023,
+      "prof": "0007",
+      "course": 4,
+      "enrolled": 40
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 23,
+    "fields": {
+      "code": "001",
+      "semester": 1,
+      "year": 2023,
+      "prof": "0011",
+      "course": 5,
+      "enrolled": 20
+    }
+  },
+  {
+    "model": "university.section",
+    "pk": 24,
+    "fields": {
+      "code": "001",
+      "semester": 3,
+      "year": 2023,
+      "prof": "0010",
+      "course": 5,
+      "enrolled": 30
+    }
+  }
+]

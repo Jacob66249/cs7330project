@@ -1,0 +1,18 @@
+[
+{
+    "model": "university.program",
+    "pk": "BA Basket Weaving",
+    "fields": {
+        "admin": "0013",
+        "department": "BSKW"
+    }
+},
+{
+    "model": "university.program",
+    "pk": "BS Computer Science",
+    "fields": {
+        "admin": "0001",
+        "department": "COMP"
+    }
+}
+]

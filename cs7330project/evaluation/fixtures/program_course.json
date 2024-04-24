@@ -1,0 +1,82 @@
+[
+{
+    "model": "university.programcourse",
+    "pk": 1,
+    "fields": {
+        "course": 1,
+        "program": "BS Computer Science"
+    }
+},
+{
+    "model": "university.programcourse",
+    "pk": 2,
+    "fields": {
+        "course": 2,
+        "program": "BS Computer Science"
+    }
+},
+{
+    "model": "university.programcourse",
+    "pk": 3,
+    "fields": {
+        "course": 4,
+        "program": "BS Computer Science"
+    }
+},
+{
+    "model": "university.programcourse",
+    "pk": 4,
+    "fields": {
+        "course": 5,
+        "program": "BS Computer Science"
+    }
+},
+{
+    "model": "university.programcourse",
+    "pk": 5,
+    "fields": {
+        "course": 6,
+        "program": "BA Basket Weaving"
+    }
+},
+{
+    "model": "university.programcourse",
+    "pk": 6,
+    "fields": {
+        "course": 7,
+        "program": "BA Basket Weaving"
+    }
+},
+{
+    "model": "university.programcourse",
+    "pk": 7,
+    "fields": {
+        "course": 8,
+        "program": "BA Basket Weaving"
+    }
+},
+{
+    "model": "university.programcourse",
+    "pk": 8,
+    "fields": {
+        "course": 9,
+        "program": "BA Basket Weaving"
+    }
+},
+{
+    "model": "university.programcourse",
+    "pk": 9,
+    "fields": {
+        "course": 4,
+        "program": "BA Basket Weaving"
+    }
+},
+{
+    "model": "university.programcourse",
+    "pk": 10,
+    "fields": {
+        "course": 6,
+        "program": "BS Computer Science"
+    }
+}
+]

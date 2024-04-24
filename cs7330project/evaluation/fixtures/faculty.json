@@ -1,0 +1,200 @@
+[
+  {
+    "model": "university.faculty",
+    "pk": "0001",
+    "fields": {
+      "name": "Jia Zhang",
+      "email": "jzhang@smu.edu",
+      "rank": 1,
+      "department": "COMP",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0002",
+    "fields": {
+      "name": "Theodore Manikas",
+      "email": "tmanikas@smu.edu",
+      "rank": 1,
+      "department": "COMP",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0003",
+    "fields": {
+      "name": "Frank Coyle",
+      "email": "fcoyle@smu.edu",
+      "rank": 2,
+      "department": "COMP",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0004",
+    "fields": {
+      "name": "Jeff Tian",
+      "email": "jtian@smu.edu",
+      "rank": 1,
+      "department": "COMP",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0005",
+    "fields": {
+      "name": "Kasilingam Periyasamy",
+      "email": "kperi@smu.edu",
+      "rank": 2,
+      "department": "COMP",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0006",
+    "fields": {
+      "name": "Ginger Alford",
+      "email": "galford@smu.edu",
+      "rank": 2,
+      "department": "COMP",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0007",
+    "fields": {
+      "name": "Joseph Camp",
+      "email": "jcamp@smu.edu",
+      "rank": 3,
+      "department": "COMP",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0008",
+    "fields": {
+      "name": "Corey Clark",
+      "email": "cclark@smu.edu",
+      "rank": 3,
+      "department": "COMP",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0009",
+    "fields": {
+      "name": "Jennifer Dworak",
+      "email": "jdworak@smu.edu",
+      "rank": 3,
+      "department": "COMP",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0010",
+    "fields": {
+      "name": "Maya El Dayeh",
+      "email": "mdayeh@smu.edu",
+      "rank": 4,
+      "department": "COMP",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0011",
+    "fields": {
+      "name": "Michael Hahsler",
+      "email": "mhahsler@smu.edu",
+      "rank": 4,
+      "department": "COMP",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0012",
+    "fields": {
+      "name": "LiGuo Huang",
+      "email": "lhuang@smu.edu",
+      "rank": 4,
+      "department": "COMP",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0013",
+    "fields": {
+      "name": "Eric Larson",
+      "email": "elarson@smu.edu",
+      "rank": 1,
+      "department": "BSKW",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0014",
+    "fields": {
+      "name": "David Lin",
+      "email": "dlin@smu.edu",
+      "rank": 1,
+      "department": "BSKW",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0015",
+    "fields": {
+      "name": "Barbara Minsker",
+      "email": "bminsker@smu.edu",
+      "rank": 2,
+      "department": "BSKW",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0016",
+    "fields": {
+      "name": "Klyne Smith",
+      "email": "ksmith@smu.edu",
+      "rank": 2,
+      "department": "BSKW",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0017",
+    "fields": {
+      "name": "Mitchell Thornton",
+      "email": "mthornton@smu.edu",
+      "rank": 3,
+      "department": "BSKW",
+      "is_active": true
+    }
+  },
+  {
+    "model": "university.faculty",
+    "pk": "0018",
+    "fields": {
+      "name": "Labiba Jahan",
+      "email": "ljahan@smu.edu",
+      "rank": 4,
+      "department": "BSKW",
+      "is_active": true
+    }
+  }
+]
