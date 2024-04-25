@@ -42,9 +42,11 @@ def delete_degree(request):
 
 
 # DegreeCourse
-def degreecourse(request):
+def list_degreecourse(request):
     queryset = models.DegreeCourse.objects.all()
-    return render(request, "degreecourse/degreecourse.html", {"queryset": queryset})
+    return render(
+        request, "degreecourse/degreecourse_list.html", {"queryset": queryset}
+    )
 
 
 # Course
