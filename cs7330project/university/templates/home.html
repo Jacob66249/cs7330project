@@ -1,0 +1,87 @@
+{% extends "default.html" %} {% load static %} {% block content %}
+<nav class="navbar navbar-dark bg-primary fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Promgram Evaluation</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasDarkNavbar"
+      aria-controls="offcanvasDarkNavbar"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div
+      class="offcanvas offcanvas-end text-bg-primary"
+      tabindex="-1"
+      id="offcanvasDarkNavbar"
+      aria-labelledby="offcanvasDarkNavbarLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">
+          Evaluation
+        </h5>
+        <button
+          type="button"
+          class="btn-close btn-close-white"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Information
+            </a>
+            <ul class="dropdown-menu dropdown-menu-primary"></ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- <img src="{% static 'img/img.png' %}" alt="Promgram Evaluation" width="600" height="630"> -->
+<div class="container mt-5 pt-5">
+  <div class="row">
+    <div class="col-md-8">
+      <img
+        src="{% static 'img/img.png' %}"
+        alt="Promgram Evaluation"
+        width="600"
+        height="630"
+      />
+    </div>
+    <div
+      class="col-md-4 d-flex flex-column align-items-center justify-content-center"
+    >
+      <div class="card mb-3" style="width: 100%">
+        <div class="card-body">
+          <h5 class="card-title">Evaluation & Suggestions</h5>
+          <p class="card-text">
+            Access detailed evaluation data and suggestions for improvement.
+          </p>
+        </div>
+      </div>
+      <div class="card" style="width: 100%">
+        <div class="card-body">
+          <h5 class="card-title">Pass Rate</h5>
+          <p class="card-text">
+            Review pass rate statistics and analyze performance metrics.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</div>
