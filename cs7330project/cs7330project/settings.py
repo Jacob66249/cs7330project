@@ -46,7 +46,7 @@ INSTALLED_APPS = [
 
 THIRD_PARTY_APPS = []
 
-LOCAL_APPS = ["evaluation"]
+LOCAL_APPS = ["university"]
 
 INSTALLED_APPS += THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -65,7 +65,7 @@ ROOT_URLCONF = "cs7330project.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
