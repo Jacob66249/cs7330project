@@ -1,12 +1,53 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from university import models
-from .forms import EvaluationForm
-from .models import Course, Section, Evaluation
+from university import models, forms
+
 
 # home
 def home(request):
     return render(request, "home.html")
+
+
+# Degree
+def list_degree(request):
+    queryset = models.Degree.objects.all()
+    return render(request, "degree/degree_list.html", {"queryset": queryset})
+
+
+def add_degree(request):
+    if request.method == "GET":
+        return render(request, "degree/add_degree.html")
+    name = request.POST.get("name")
+    level = request.POST.get("level")
+    models.Degree.objects.create(level=level, name=name)
+    return redirect("/degree/")
+
+
+def edit_degree(request, Name):
+    if request.method == "GET":
+        row_object = models.Degree.objects.filter(name=Name).first()
+        return render(request, "degree/edit_degree.html", {"row_object": row_object})
+
+    Level = request.POST.get("level")
+    models.Degree.objects.filter(name=Name).update(level=Level)
+    return redirect("/degree/")
+
+
+def delete_degree(request):
+    name = request.GET.get("name")
+    level = request.GET.get("level")
+    if name and level:
+        models.Degree.objects.filter(name=name, level=level).delete()
+    return redirect("/degree/")
+
+
+# DegreeCourse
+def list_degreecourse(request):
+    queryset = models.DegreeCourse.objects.all()
+    return render(
+        request, "degreecourse/degreecourse_list.html", {"queryset": queryset}
+    )
 
 
 # Course
@@ -71,3 +112,26 @@ def update_evaluation(request, evaluation_id):
     else:
         form = EvaluationForm(instance=evaluation)
     return render(request, 'update_evaluation.html', {'form': form, 'evaluation': evaluation})
+
+# Instructor
+def list_instructor(request):
+    queryset = models.Instructor.objects.all()
+    return render(request, "instructor/instructor_list.html", {"queryset": queryset})
+
+
+# Section
+def list_section(request):
+    queryset = models.Section.objects.all()
+    return render(request, "section/section_list.html", {"queryset": queryset})
+
+
+# Objective
+def list_objective(request):
+    queryset = models.Objective.objects.all()
+    return render(request, "objective/objective_list.html", {"queryset": queryset})
+
+
+# Evaluation
+def list_evaluation(request):
+    queryset = models.Evaluation.objects.all()
+    return render(request, "evaluation/evaluation_list.html", {"queryset": queryset})

@@ -1,0 +1,53 @@
+{% extends "default.html" %} {% block content %}
+<div class="container mt-4">
+  <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
+  <div class="d-flex justify-content-between align-items-center">
+    <h2 class="mb-0">Evaluation</h2>
+    <a class="btn btn-warning mb-4" href="#"
+      >Entering evaluation</a
+    >
+    <a class="btn btn-primary mb-4" href="#"
+      >Add new Evaluations</a
+    >
+  </div>
+  
+
+  <table class="table">
+    <tr>
+      <th scope="col">Evaluate_Id</th>
+      <th scope="col">Method</th>
+      <th scope="col">A_Stu_Num</th>
+      <th scope="col">B_Stu_Num</th>
+      <th scope="col">C_Stu_Num</th>
+      <th scope="col">F_Stu_Num</th>
+      <th scope="col">Imprv_sgts</th>
+      <th scope="col">Course_Id</th>
+      <th scope="col">Section_Id</th>
+      <th scope="col">Degree_name</th>
+      <th scope="col">Degree_Level</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for obj in queryset %}
+    <tr>
+        <th>{{ obj.evaluate_id }}</th>
+        <td>{{ obj.method }}</td>
+        <td>{{obj.levelA_stu_num}}</td>
+        <td>{{obj.levelB_stu_num}}</td>
+        <td>{{obj.levelC_stu_num}}</td>
+        <td>{{obj.levelF_stu_num}}</td>
+        <td>{{obj.improvement_suggestions}}</td>
+        <td>{{obj.course_id}}</td>
+        <td>{{obj.section_id}}</td>
+        <td>{{obj.degree_name}}</td>
+        <td>{{obj.degree_level}}</td>
+        <td>
+          <a class="btn btn-primary"href="#">Edit</a>
+          <a class="btn btn-danger" href="#">Delete</a>
+        </td>
+    </tr>
+  {% endfor %}
+  </table>
+</div>
+{% endblock %}

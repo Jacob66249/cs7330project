@@ -1,0 +1,163 @@
+[
+    {
+        "model": "university.objective",
+        "pk": "OBJ101",
+        "fields": {
+            "title": "Advanced Operating System Functions",
+            "description": "Understand and apply advanced concepts in operating systems, including concurrency and synchronization.",
+            "course": "CS7343"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ102",
+        "fields": {
+            "title": "Develop UI/UX Design Skills",
+            "description": "Apply principles of user-centered design to create effective and aesthetically pleasing interfaces.",
+            "course": "CS7312"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ202",
+        "fields": {
+            "title": "UX Research Methods",
+            "description": "Master user experience research methods to gather insights and improve design strategies.",
+            "course": "CS7312"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ302",
+        "fields": {
+            "title": "Prototyping and Wireframing",
+            "description": "Learn to create effective prototypes and wireframes as part of the UI/UX design process.",
+            "course": "CS7312"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ103",
+        "fields": {
+            "title": "Master Software Testing Techniques",
+            "description": "Gain proficiency in various testing techniques and tools to ensure software quality.",
+            "course": "CS7314"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ104",
+        "fields": {
+            "title": "Software Engineering Methodologies",
+            "description": "Learn and apply industry-standard software development methodologies.",
+            "course": "CS7328"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ204",
+        "fields": {
+            "title": "Risk Management in Software Projects",
+            "description": "Understand risk management techniques and apply them in the context of software development to mitigate potential setbacks.",
+            "course": "CS7328"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ304",
+        "fields": {
+            "title": "Agile Development Practices",
+            "description": "Students will learn and apply agile methodologies to manage software development projects effectively.",
+            "course": "CS7328"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ105",
+        "fields": {
+            "title": "Database Management Systems",
+            "description": "Understand the architecture and management of modern database systems.",
+            "course": "CS7330"
+        }
+    },{
+        "model": "university.objective",
+        "pk": "OBJ205",
+        "fields": {
+            "title": "Database Design Principles",
+            "description": "Understand the principles of database design, including normalization and schema architecture, to build efficient database systems.",
+            "course": "CS7330"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ305",
+        "fields": {
+            "title": "SQL and NoSQL Databases",
+            "description": "Gain proficiency in SQL and explore NoSQL databases, understanding their use cases and performance benefits.",
+            "course": "CS7330"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ106",
+        "fields": {
+            "title": "Security Systems Design",
+            "description": "Design and evaluate secure computer systems to defend against malicious attacks.",
+            "course": "CS7339"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ107",
+        "fields": {
+            "title": "Data and Network Security Fundamentals",
+            "description": "Understand the fundamental concepts and practices in data and network security.",
+            "course": "CS7349"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ108",
+        "fields": {
+            "title": "Software Security Best Practices",
+            "description": "Learn best practices and techniques for securing software applications.",
+            "course": "CS7359"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ109",
+        "fields": {
+            "title": "Data Structures Proficiency",
+            "description": "Understand and implement essential data structures for effective problem solving.",
+            "course": "CS2341"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ110",
+        "fields": {
+            "title": "Computational Theory",
+            "description": "Explore fundamental theories of computation and their practical applications.",
+            "course": "CS3341"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ111",
+        "fields": {
+            "title": "Advanced Calculus Applications",
+            "description": "Apply advanced calculus techniques to solve complex engineering problems.",
+            "course": "MATH1340"
+        }
+    },
+    {
+        "model": "university.objective",
+        "pk": "OBJ112",
+        "fields": {
+            "title": "Capstone Project Execution",
+            "description": "Develop and implement a comprehensive project that integrates various aspects of computer science education.",
+            "course": "CS5351"
+        }
+    }
+]

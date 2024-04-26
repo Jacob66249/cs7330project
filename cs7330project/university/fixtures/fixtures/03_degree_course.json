@@ -1,0 +1,415 @@
+[
+    {
+        "model": "university.degreecourse",
+        "pk": 1,
+        "fields": {
+            "course": "CS7343",
+            "is_core": true,
+            "degree": 2,
+            "degree_name": "Computer Science",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 2,
+        "fields": {
+            "course": "CS7330",
+            "is_core": true,
+            "degree": 2,
+            "degree_name": "Computer Science",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 3,
+        "fields": {
+            "course": "CS7312",
+            "is_core": false,
+            "degree": 2,
+            "degree_name": "Computer Science",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 4,
+        "fields": {
+            "course": "CS7314",
+            "is_core": false,
+            "degree": 2,
+            "degree_name": "Computer Science",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 5,
+        "fields": {
+            "course": "CS7328",
+            "is_core": false,
+            "degree": 2,
+            "degree_name": "Computer Science",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 6,
+        "fields": {
+            "course": "CS7339",
+            "is_core": false,
+            "degree": 2,
+            "degree_name": "Computer Science",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 7,
+        "fields": {
+            "course": "CS7349",
+            "is_core": false,
+            "degree": 2,
+            "degree_name": "Computer Science",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 8,
+        "fields": {
+            "course": "CS7359",
+            "is_core": false,
+            "degree": 2,
+            "degree_name": "Computer Science",
+            "degree_level": "MS"
+        }
+    },
+    
+    {
+        "model": "university.degreecourse",
+        "pk": 9,
+        "fields": {
+            "course": "CS7343",
+            "is_core": false,
+            "degree": 3,
+            "degree_name": "Datacenter System Engineering",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 10,
+        "fields": {
+            "course": "CS7330",
+            "is_core": false,
+            "degree": 3,
+            "degree_name": "Datacenter System Engineering",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 11,
+        "fields": {
+            "course": "CS7312",
+            "is_core": false,
+            "degree": 3,
+            "degree_name": "Datacenter System Engineering",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 12,
+        "fields": {
+            "course": "CS7314",
+            "is_core": false,
+            "degree": 3,
+            "degree_name": "Datacenter System Engineering",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 13,
+        "fields": {
+            "course": "CS7328",
+            "is_core": false,
+            "degree": 3,
+            "degree_name": "Datacenter System Engineering",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 14,
+        "fields": {
+            "course": "CS7339",
+            "is_core": false,
+            "degree": 3,
+            "degree_name": "Datacenter System Engineering",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 15,
+        "fields": {
+            "course": "CS7349",
+            "is_core": true,
+            "degree": 3,
+            "degree_name": "Datacenter System Engineering",
+            "degree_level": "MS"
+        }
+    },
+
+    {
+        "model": "university.degreecourse",
+        "pk": 16,
+        "fields": {
+            "course": "CS7359",
+            "is_core": false,
+            "degree": 3,
+            "degree_name": "Datacenter System Engineering",
+            "degree_level": "MS"
+        }
+    },
+
+    {
+        "model": "university.degreecourse",
+        "pk": 17,
+        "fields": {
+            "course": "CS7343",
+            "is_core": true,
+            "degree": 5,
+            "degree_name": "Cybersecurity",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 18,
+        "fields": {
+            "course": "CS7330",
+            "is_core": false,
+            "degree": 5,
+            "degree_name": "Cybersecurity",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 19,
+        "fields": {
+            "course": "CS7312",
+            "is_core": false,
+            "degree": 5,
+            "degree_name": "Cybersecurity",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 20,
+        "fields": {
+            "course": "CS7314",
+            "is_core": false,
+            "degree": 5,
+            "degree_name": "Cybersecurity",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 21,
+        "fields": {
+            "course": "CS7328",
+            "is_core": false,
+            "degree": 5,
+            "degree_name": "Cybersecurity",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 22,
+        "fields": {
+            "course": "CS7339",
+            "is_core": true,
+            "degree": 5,
+            "degree_name": "Cybersecurity",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 23,
+        "fields": {
+            "course": "CS7349",
+            "is_core": true,
+            "degree": 5,
+            "degree_name": "Cybersecurity",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 24,
+        "fields": {
+            "course": "CS7359",
+            "is_core": true,
+            "degree": 5,
+            "degree_name": "Cybersecurity",
+            "degree_level": "MS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 25,
+        "fields": {
+            "course": "CS7330",
+            "is_core": false,
+            "degree": 1,
+            "degree_name": "Computer Science",
+            "degree_level": "BS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 26,
+        "fields": {
+            "course": "CS3341",
+            "is_core": true,
+            "degree": 1,
+            "degree_name": "Computer Science",
+            "degree_level": "BS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 27,
+        "fields": {
+            "course": "CS5351",
+            "is_core": true,
+            "degree": 1,
+            "degree_name": "Computer Science",
+            "degree_level": "BS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 28,
+        "fields": {
+            "course": "MATH1340",
+            "is_core": true,
+            "degree": 1,
+            "degree_name": "Computer Science",
+            "degree_level": "BS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 29,
+        "fields": {
+            "course": "CS2341",
+            "is_core": true,
+            "degree": 1,
+            "degree_name": "Computer Science",
+            "degree_level": "BS"
+        }
+    }
+
+    ,
+    {
+        "model": "university.degreecourse",
+        "pk": 30,
+        "fields": {
+            "course": "CS3341",
+            "is_core": false,
+            "degree": 4,
+            "degree_name": "Computer Science",
+            "degree_level": "BA"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 31,
+        "fields": {
+            "course": "CS5351",
+            "is_core": false,
+            "degree": 4,
+            "degree_name": "Computer Science",
+            "degree_level": "BA"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 32,
+        "fields": {
+            "course": "MATH1340",
+            "is_core": true,
+            "degree": 4,
+            "degree_name": "Computer Science",
+            "degree_level": "BA"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 33,
+        "fields": {
+            "course": "CS2341",
+            "is_core": true,
+            "degree": 4,
+            "degree_name": "Computer Science",
+            "degree_level": "BA"
+        }
+    }
+    ,
+    {
+        "model": "university.degreecourse",
+        "pk": 34,
+        "fields": {
+            "course": "CS3341",
+            "is_core": true,
+            "degree": 6,
+            "degree_name": "Electrical and Computer Engineering",
+            "degree_level": "BS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 35,
+        "fields": {
+            "course": "CS5351",
+            "is_core": false,
+            "degree": 6,
+            "degree_name": "Electrical and Computer Engineering",
+            "degree_level": "BS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 36,
+        "fields": {
+            "course": "MATH1340",
+            "is_core": true,
+            "degree": 6,
+            "degree_name": "Electrical and Computer Engineering",
+            "degree_level": "BS"
+        }
+    },
+    {
+        "model": "university.degreecourse",
+        "pk": 37,
+        "fields": {
+            "course": "CS2341",
+            "is_core": true,
+            "degree": 6,
+            "degree_name": "Electrical and Computer Engineering",
+            "degree_level": "BS"
+        }
+    }
+]

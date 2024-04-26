@@ -1,0 +1,86 @@
+[
+    {
+        "model": "university.course",
+        "pk": "CS7343",
+        "fields": {
+            "name": "Operating Systems"
+        }
+    },
+    {
+        "model": "university.course",
+        "pk": "CS7312",
+        "fields": {
+            "name": "UI/UX"
+        }
+    },
+    {
+        "model": "university.course",
+        "pk": "CS7314",
+        "fields": {
+            "name": "Software Testing/Quality Assurance"
+        }
+    },
+    {
+        "model": "university.course",
+        "pk": "CS7328",
+        "fields": {
+            "name": "Software Engineerning"
+        }
+    },
+    {
+        "model": "university.course",
+        "pk": "CS7330",
+        "fields": {
+            "name": "File Organization and Database Management"
+        }
+    },
+    {
+        "model": "university.course",
+        "pk": "CS7339",
+        "fields": {
+            "name": "Computer System Security"
+        }
+    },
+    {
+        "model": "university.course",
+        "pk": "CS7349",
+        "fields": {
+            "name": "Data and Network Security"
+        }
+    },
+    {
+        "model": "university.course",
+        "pk": "CS7359",
+        "fields": {
+            "name": "Software Security"
+        }
+    },
+    {
+        "model": "university.course",
+        "pk": "CS2341",
+        "fields": {
+            "name": "Data Structures"
+        }
+    },
+    {
+        "model": "university.course",
+        "pk": "CS3341",
+        "fields": {
+            "name": "Foundations of Modern Computing"
+        }
+    },
+    {
+        "model": "university.course",
+        "pk": "MATH1340",
+        "fields": {
+            "name": "Consolidated Calculus"
+        }
+    },
+    {
+        "model": "university.course",
+        "pk": "CS5351",
+        "fields": {
+            "name": "Senior Design"
+        }
+    }
+]
