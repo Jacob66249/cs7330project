@@ -1,7 +1,9 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
-from university import models, forms
 from django.core.paginator import Paginator
+from university import models, forms
+from .forms import SemesterSelectionForm
+from .models import Section, Evaluation  # Assuming you have these models
 
 
 # home
@@ -219,3 +221,6 @@ def list_evaluation(request):
     page_obj = paginator.get_page(page_number)
 
     return render(request, "evaluation/evaluation_list.html", {"page_obj": page_obj})
+
+
+# Query involving evaluation
