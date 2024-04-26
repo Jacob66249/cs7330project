@@ -3,10 +3,14 @@
   <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
   <div class="d-flex justify-content-between align-items-center">
     <h2 class="mb-0">Evaluation</h2>
-    <a class="btn btn-primary mb-1" href="#"
+    <a class="btn btn-warning mb-4" href="#"
+      >Entering evaluation</a
+    >
+    <a class="btn btn-primary mb-4" href="#"
       >Add new Evaluations</a
     >
   </div>
+  
 
   <table class="table">
     <tr>
@@ -39,7 +43,7 @@
         <td>{{obj.degree_name}}</td>
         <td>{{obj.degree_level}}</td>
         <td>
-          <a class="btn btn-warning"href="#">Edit</a>
+          <a class="btn btn-primary"href="#">Edit</a>
           <a class="btn btn-danger" href="#">Delete</a>
         </td>
     </tr>

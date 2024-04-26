@@ -1,0 +1,45 @@
+[
+    {
+        "model": "university.instructor",
+        "pk": "IN450",
+        "fields": {
+            "name": "Alice Johnson"
+        }
+    },
+    {
+        "model": "university.instructor",
+        "pk": "IN451",
+        "fields": {
+            "name": "Bob Smith"
+        }
+    },
+    {
+        "model": "university.instructor",
+        "pk": "IN452",
+        "fields": {
+            "name": "John Doe"
+        }
+    },
+    {
+        "model": "university.instructor",
+        "pk": "IN453",
+        "fields": {
+            "name": "Jane Ginger"
+        }
+    },
+    
+    {
+        "model": "university.instructor",
+        "pk": "IN454",
+        "fields": {
+            "name": "Jack Doe"
+        }
+    },
+    {
+        "model": "university.instructor",
+        "pk": "IN455",
+        "fields": {
+            "name": "Charlie Brown"
+        }
+    }
+]

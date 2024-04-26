@@ -1,0 +1,927 @@
+
+[
+    {
+        "model": "university.section",
+        "pk": 1,
+        "fields": {
+            "degree": 1,
+            "course": "CS7343",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 40
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 2,
+        "fields": {
+            "degree": 1,
+            "course": "CS7343",
+            "instructor": "IN450",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 40
+        }
+    }, 
+    {
+        "model": "university.section",
+        "pk": 3,
+        "fields": {
+            "degree": 1,
+            "course": "CS7343",
+            "instructor": "IN450",
+            "section_id": "103",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 10
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 4,
+        "fields": {
+            "degree": 3,
+            "course": "CS7343",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 20
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 5,
+        "fields": {
+            "degree": 3,
+            "course": "CS7343",
+            "instructor": "IN450",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 20
+        }
+    }, 
+    {
+        "model": "university.section",
+        "pk": 6,
+        "fields": {
+            "degree": 3,
+            "course": "CS7343",
+            "instructor": "IN450",
+            "section_id": "103",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 20
+        }
+    },{
+        "model": "university.section",
+        "pk": 7,
+        "fields": {
+            "degree": 5,
+            "course": "CS7343",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 25
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 8,
+        "fields": {
+            "degree": 5,
+            "course": "CS7343",
+            "instructor": "IN450",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 25
+        }
+    }, 
+    {
+        "model": "university.section",
+        "pk": 9,
+        "fields": {
+            "degree": 5,
+            "course": "CS7343",
+            "instructor": "IN450",
+            "section_id": "103",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 25
+        }
+    },
+
+    {
+        "model": "university.section",
+        "pk": 10,
+        "fields": {
+            "degree": 2,
+            "course": "CS7330",
+            "instructor": "IN451",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 25
+        }
+    }, 
+    {
+        "model": "university.section",
+        "pk": 11,
+        "fields": {
+            "degree": 2,
+            "course": "CS7330",
+            "instructor": "IN454",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 25
+        }
+    },{
+        "model": "university.section",
+        "pk": 12,
+        "fields": {
+            "degree": 3,
+            "course": "CS7330",
+            "instructor": "IN451",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 21
+        }
+    }, 
+    {
+        "model": "university.section",
+        "pk": 13,
+        "fields": {
+            "degree": 3,
+            "course": "CS7330",
+            "instructor": "IN451",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 21
+        }
+    },{
+        "model": "university.section",
+        "pk": 14,
+        "fields": {
+            "degree": 5,
+            "course": "CS7330",
+            "instructor": "IN454",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 25
+        }
+    }, 
+    {
+        "model": "university.section",
+        "pk": 15,
+        "fields": {
+            "degree": 5,
+            "course": "CS7330",
+            "instructor": "IN451",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 25
+        }
+    },{
+        "model": "university.section",
+        "pk": 16,
+        "fields": {
+            "degree": 1,
+            "course": "CS7330",
+            "instructor": "IN454",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 15
+        }
+    }, 
+    {
+        "model": "university.section",
+        "pk": 17,
+        "fields": {
+            "degree": 1,
+            "course": "CS7330",
+            "instructor": "IN451",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 15
+        }
+    },
+
+    {
+        "model": "university.section",
+        "pk": 18,
+        "fields": {
+            "degree": 2,
+            "course": "CS7312",
+            "instructor": "IN452",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 40
+        }
+    },{
+        "model": "university.section",
+        "pk": 19,
+        "fields": {
+            "degree": 3,
+            "course": "CS7312",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 30
+        }
+    },{
+        "model": "university.section",
+        "pk": 20,
+        "fields": {
+            "degree": 5,
+            "course": "CS7312",
+            "instructor": "IN452",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 31
+        }
+    },
+
+    {
+        "model": "university.section",
+        "pk": 21,
+        "fields": {
+            "degree": 2,
+            "course": "CS7314",
+            "instructor": "IN452",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 36
+        }
+    },{
+        "model": "university.section",
+        "pk": 22,
+        "fields": {
+            "degree": 3,
+            "course": "CS7314",
+            "instructor": "IN450",
+            "section_id": "314",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 12
+        }
+    },{
+        "model": "university.section",
+        "pk": 23,
+        "fields": {
+            "degree": 5,
+            "course": "CS7314",
+            "instructor": "IN452",
+            "section_id": "314",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 31
+        }
+    },
+
+    {
+        "model": "university.section",
+        "pk": 24,
+        "fields": {
+            "degree": 2,
+            "course": "CS7328",
+            "instructor": "IN453",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 46
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 25,
+        "fields": {
+            "degree": 3,
+            "course": "CS7328",
+            "instructor": "IN453",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 42
+        }
+    },
+    
+    {
+        "model": "university.section",
+        "pk": 26,
+        "fields": {
+            "degree": 5,
+            "course": "CS7328",
+            "instructor": "IN453",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 44
+        }
+    },
+
+    {
+        "model": "university.section",
+        "pk": 27,
+        "fields": {
+            "degree": 2,
+            "course": "CS7339",
+            "instructor": "IN453",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 46
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 28,
+        "fields": {
+            "degree": 3,
+            "course": "CS7339",
+            "instructor": "IN454",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 42
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 29,
+        "fields": {
+            "degree": 5,
+            "course": "CS7339",
+            "instructor": "IN454",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 30
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 30,
+        "fields": {
+            "degree": 2,
+            "course": "CS7339",
+            "instructor": "IN453",
+            "section_id": "101",
+            "semester": "Summer",
+            "year": 2024,
+            "enrolled_stu_num": 46
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 31,
+        "fields": {
+            "degree": 3,
+            "course": "CS7339",
+            "instructor": "IN454",
+            "section_id": "101",
+            "semester": "Summer",
+            "year": 2024,
+            "enrolled_stu_num": 42
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 32,
+        "fields": {
+            "degree": 5,
+            "course": "CS7339",
+            "instructor": "IN454",
+            "section_id": "101",
+            "semester": "Summer",
+            "year": 2024,
+            "enrolled_stu_num": 30
+        }
+    },
+
+    {
+        "model": "university.section",
+        "pk": 33,
+        "fields": {
+            "degree": 2,
+            "course": "CS7349",
+            "instructor": "IN454",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2025,
+            "enrolled_stu_num": 29
+        }
+    },{
+        "model": "university.section",
+        "pk": 34,
+        "fields": {
+            "degree": 3,
+            "course": "CS7349",
+            "instructor": "IN454",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2025,
+            "enrolled_stu_num": 28
+        }
+    },{
+        "model": "university.section",
+        "pk": 35,
+        "fields": {
+            "degree": 5,
+            "course": "CS7349",
+            "instructor": "IN454",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2025,
+            "enrolled_stu_num": 21
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 36,
+        "fields": {
+            "degree": 2,
+            "course": "CS7349",
+            "instructor": "IN454",
+            "section_id": "102",
+            "semester": "Spring",
+            "year": 2025,
+            "enrolled_stu_num": 12
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 37,
+        "fields": {
+            "degree": 3,
+            "course": "CS7349",
+            "instructor": "IN454",
+            "section_id": "102",
+            "semester": "Spring",
+            "year": 2025,
+            "enrolled_stu_num": 21
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 38,
+        "fields": {
+            "degree": 5,
+            "course": "CS7349",
+            "instructor": "IN454",
+            "section_id": "102",
+            "semester": "Spring",
+            "year": 2025,
+            "enrolled_stu_num": 12
+        }
+    },
+
+    {
+        "model": "university.section",
+        "pk": 39,
+        "fields": {
+            "degree": 2,
+            "course": "CS7359",
+            "instructor": "IN454",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2025,
+            "enrolled_stu_num": 11
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 40,
+        "fields": {
+            "degree": 3,
+            "course": "CS7359",
+            "instructor": "IN454",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2025,
+            "enrolled_stu_num": 32
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 41,
+        "fields": {
+            "degree": 5,
+            "course": "CS7359",
+            "instructor": "IN454",
+            "section_id": "101",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 5
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 42,
+        "fields": {
+            "degree": 2,
+            "course": "CS7359",
+            "instructor": "IN454",
+            "section_id": "102",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 12
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 43,
+        "fields": {
+            "degree": 3,
+            "course": "CS7359",
+            "instructor": "IN454",
+            "section_id": "102",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 24
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 44,
+        "fields": {
+            "degree": 5,
+            "course": "CS7359",
+            "instructor": "IN454",
+            "section_id": "102",
+            "semester": "Spring",
+            "year": 2024,
+            "enrolled_stu_num": 60
+        }
+    },
+
+    {
+        "model": "university.section",
+        "pk": 45,
+        "fields": {
+            "degree": 1,
+            "course": "CS2341",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 48
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 46,
+        "fields": {
+            "degree": 1,
+            "course": "CS2341",
+            "instructor": "IN450",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 48
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 47,
+        "fields": {
+            "degree": 6,
+            "course": "CS2341",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 60
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 48,
+        "fields": {
+            "degree": 6,
+            "course": "CS2341",
+            "instructor": "IN450",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 60
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 49,
+        "fields": {
+            "degree": 4,
+            "course": "CS2341",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 26
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 50,
+        "fields": {
+            "degree": 4,
+            "course": "CS2341",
+            "instructor": "IN450",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 22
+        }
+    },
+
+    {
+        "model": "university.section",
+        "pk": 51,
+        "fields": {
+            "degree": 1,
+            "course": "CS3341",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 48
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 52,
+        "fields": {
+            "degree": 1,
+            "course": "CS3341",
+            "instructor": "IN451",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 48
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 53,
+        "fields": {
+            "degree": 6,
+            "course": "CS3341",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 60
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 54,
+        "fields": {
+            "degree": 6,
+            "course": "CS3341",
+            "instructor": "IN451",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 60
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 55,
+        "fields": {
+            "degree": 4,
+            "course": "CS3341",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 26
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 56,
+        "fields": {
+            "degree": 4,
+            "course": "CS3341",
+            "instructor": "IN451",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2024,
+            "enrolled_stu_num": 22
+        }
+    },
+
+    {
+        "model": "university.section",
+        "pk": 57,
+        "fields": {
+            "degree": 1,
+            "course": "MATH1340",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2026,
+            "enrolled_stu_num": 42
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 58,
+        "fields": {
+            "degree": 1,
+            "course": "MATH1340",
+            "instructor": "IN453",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2026,
+            "enrolled_stu_num": 42
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 59,
+        "fields": {
+            "degree": 6,
+            "course": "MATH1340",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2026,
+            "enrolled_stu_num": 14
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 60,
+        "fields": {
+            "degree": 6,
+            "course": "MATH1340",
+            "instructor": "IN453",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2026,
+            "enrolled_stu_num": 16
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 61,
+        "fields": {
+            "degree": 4,
+            "course": "MATH1340",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2026,
+            "enrolled_stu_num": 21
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 62,
+        "fields": {
+            "degree": 4,
+            "course": "MATH1340",
+            "instructor": "IN453",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2026,
+            "enrolled_stu_num": 11
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 63,
+        "fields": {
+            "degree": 1,
+            "course": "CS5351",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2026,
+            "enrolled_stu_num": 42
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 64,
+        "fields": {
+            "degree": 1,
+            "course": "CS5351",
+            "instructor": "IN453",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2026,
+            "enrolled_stu_num": 42
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 65,
+        "fields": {
+            "degree": 1,
+            "course": "CS5351",
+            "instructor": "IN452",
+            "section_id": "103",
+            "semester": "Fall",
+            "year": 2026,
+            "enrolled_stu_num": 42
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 66,
+        "fields": {
+            "degree": 6,
+            "course": "CS5351",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2026,
+            "enrolled_stu_num": 14
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 67,
+        "fields": {
+            "degree": 6,
+            "course": "CS5351",
+            "instructor": "IN453",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2026,
+            "enrolled_stu_num": 16
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 68,
+        "fields": {
+            "degree": 6,
+            "course": "CS5351",
+            "instructor": "IN452",
+            "section_id": "103",
+            "semester": "Fall",
+            "year": 2026,
+            "enrolled_stu_num": 16
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 69,
+        "fields": {
+            "degree": 4,
+            "course": "CS5351",
+            "instructor": "IN450",
+            "section_id": "101",
+            "semester": "Fall",
+            "year": 2026,
+            "enrolled_stu_num": 21
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 70,
+        "fields": {
+            "degree": 4,
+            "course": "CS5351",
+            "instructor": "IN453",
+            "section_id": "102",
+            "semester": "Fall",
+            "year": 2026,
+            "enrolled_stu_num": 11
+        }
+    },
+    {
+        "model": "university.section",
+        "pk": 71,
+        "fields": {
+            "degree": 4,
+            "course": "CS5351",
+            "instructor": "IN452",
+            "section_id": "103",
+            "semester": "Fall",
+            "year": 2026,
+            "enrolled_stu_num": 11
+        }
+    }
+]

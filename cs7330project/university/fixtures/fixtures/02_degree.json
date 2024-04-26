@@ -1,0 +1,50 @@
+[
+    {
+        "model": "university.degree",
+        "pk": 1,
+        "fields": {
+            "name": "Computer Science",
+            "level": "BS"
+        }
+    },
+    {
+        "model": "university.degree",
+        "pk": 2,
+        "fields": {
+            "name": "Computer Science",
+            "level": "MS"
+        }
+    },
+    {
+        "model": "university.degree",
+        "pk": 3,
+        "fields": {
+            "name": "Datacenter System Engineering",
+            "level": "MS"
+        }
+    },
+    {
+        "model": "university.degree",
+        "pk": 4,
+        "fields": {
+            "name": "Computer Science",
+            "level": "BA"
+        }
+    },
+    {
+        "model": "university.degree",
+        "pk": 5,
+        "fields": {
+            "name": "Cybersecurity",
+            "level": "MS"
+        }
+    },
+    {
+        "model": "university.degree",
+        "pk": 6,
+        "fields": {
+            "name": "Electrical and Computer Engineering",
+            "level": "BS"
+        }
+    }
+]
