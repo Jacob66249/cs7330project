@@ -2,8 +2,6 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 from university import models, forms
-from .forms import SemesterSelectionForm
-from .models import Section, Evaluation  # Assuming you have these models
 
 
 # home
