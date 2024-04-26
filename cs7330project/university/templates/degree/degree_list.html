@@ -8,35 +8,55 @@
     >
   </div>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Level</th>
-          <th scope="col">Name</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for obj in queryset %}
-        <tr>
-          <th>{{obj.level}}</th>
-          <td>{{obj.name}}</td>
-          <td>
-            <a
-              class="btn btn-primary"
-              href="/degree/{{obj.name}}/edit_degree/"
-              >Edit</a
-            >
-            <a
-              class="btn btn-danger"
-              href="{% url 'delete_degree' %}?name={{ obj.name|urlencode }}&level={{ obj.level|urlencode }}"
-              >Delete</a
-            >
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Level</th>
+        <th scope="col">Name</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for obj in page_obj %}
+      <tr>
+        <th>{{ obj.level }}</th>
+        <td>{{ obj.name }}</td>
+        <td>
+          <a class="btn btn-primary" href="/degree/{{obj.name}}/edit_degree/"
+            >Edit</a
+          >
+          <a
+            class="btn btn-danger"
+            href="{% url 'delete_degree' %}?name={{ obj.name|urlencode }}&level={{ obj.level|urlencode }}"
+            >Delete</a
+          >
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+      <a
+        class="btn btn-outline-primary"
+        href="?page={{ page_obj.previous_page_number }}"
+        >Previous</a
+      >
+      {% endif %}
+
+      <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+      <a
+        class="btn btn-outline-primary"
+        href="?page={{ page_obj.next_page_number }}"
+        >Next</a
+      >
+      {% endif %}
+    </span>
   </div>
 </div>
 {% endblock %}

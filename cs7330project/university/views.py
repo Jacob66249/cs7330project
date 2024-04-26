@@ -1,7 +1,7 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
-from university import models
 from university import models, forms
+from django.core.paginator import Paginator
 
 
 # home
@@ -11,8 +11,13 @@ def home(request):
 
 # Degree
 def list_degree(request):
-    queryset = models.Degree.objects.all()
-    return render(request, "degree/degree_list.html", {"queryset": queryset})
+    degree_list = models.Degree.objects.all()
+    paginator = Paginator(degree_list, 8)  # Display 8 degrees per page
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, "degree/degree_list.html", {"page_obj": page_obj})
 
 
 def add_degree(request):
@@ -44,16 +49,26 @@ def delete_degree(request):
 
 # DegreeCourse
 def list_degreecourse(request):
-    queryset = models.DegreeCourse.objects.all()
+    degreecourse_list = models.DegreeCourse.objects.all()
+    paginator = Paginator(degreecourse_list, 8)  # Display 8 degree courses per page
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     return render(
-        request, "degreecourse/degreecourse_list.html", {"queryset": queryset}
+        request, "degreecourse/degreecourse_list.html", {"page_obj": page_obj}
     )
 
 
 # Course
 def list_course(request):
-    queryset = models.Course.objects.all().order_by("course_id")
-    return render(request, "course/course_list.html", {"queryset": queryset})
+    course_list = models.Course.objects.all().order_by("course_id")
+    paginator = Paginator(course_list, 8)  # Display 8 courses per page
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, "course/course_list.html", {"page_obj": page_obj})
 
 
 def add_course(request):
@@ -81,25 +96,79 @@ def edit_course(request, Course_Id):
     return redirect("/course/")
 
 
+def course_detail(request):
+    form = forms.QueryCourseForm(request.POST or None)
+    sections = None
+
+    if request.method == "POST" and form.is_valid():
+        course = form.cleaned_data["course"]
+        year = form.cleaned_data["year"]
+        semester = form.cleaned_data["semester"]
+        sections = models.Section.objects.filter(
+            course=course, year=year, semester=semester
+        )
+    return render(
+        request, "course/course_details.html", {"form": form, "sections": sections}
+    )
+
+
 # Instructor
 def list_instructor(request):
-    queryset = models.Instructor.objects.all()
-    return render(request, "instructor/instructor_list.html", {"queryset": queryset})
+    instructor_list = models.Instructor.objects.all()
+    paginator = Paginator(instructor_list, 8)  # Display 8 instructors per page
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, "instructor/instructor_list.html", {"page_obj": page_obj})
+
+
+def instructor_details(request):
+    form = forms.QueryInstructorForm(request.POST or None)
+    sections = None
+    if request.method == "POST" and form.is_valid():
+        instructor = form.cleaned_data["instructor"]
+        year = form.cleaned_data["year"]
+        semester = form.cleaned_data["semester"]
+        sections = models.Section.objects.filter(
+            instructor=instructor, year=year, semester=semester
+        )
+
+    return render(
+        request,
+        "instructor/instructor_details.html",
+        {"form": form, "sections": sections},
+    )
 
 
 # Section
 def list_section(request):
-    queryset = models.Section.objects.all()
-    return render(request, "section/section_list.html", {"queryset": queryset})
+    section_list = models.Section.objects.all()
+    paginator = Paginator(section_list, 8)  # Display 8 sections per page
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, "section/section_list.html", {"page_obj": page_obj})
 
 
 # Objective
 def list_objective(request):
-    queryset = models.Objective.objects.all()
-    return render(request, "objective/objective_list.html", {"queryset": queryset})
+    objective_list = models.Objective.objects.all()
+    paginator = Paginator(objective_list, 8)  # Display 8 objectives per page
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, "objective/objective_list.html", {"page_obj": page_obj})
 
 
 # Evaluation
 def list_evaluation(request):
-    queryset = models.Evaluation.objects.all()
-    return render(request, "evaluation/evaluation_list.html", {"queryset": queryset})
+    evaluation_list = models.Evaluation.objects.all()
+    paginator = Paginator(evaluation_list, 8)
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, "evaluation/evaluation_list.html", {"page_obj": page_obj})

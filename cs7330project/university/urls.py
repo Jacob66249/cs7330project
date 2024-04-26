@@ -15,8 +15,10 @@ urlpatterns = [
     path("course/add_course/", views.add_course, name="add_course"),
     path("course/delete_course/", views.delete_course, name="delete_course"),
     path("course/<str:Course_Id>/edit_course/", views.edit_course, name="edit_course"),
+    path("course_details/", views.course_detail, name="course_detail"),
     # Instructor
     path("instructor/", views.list_instructor, name="list_instructor"),
+    path("instructor_details/", views.instructor_details, name="instructor_detail"),
     # Section
     path("section/", views.list_section, name="list_section"),
     # Objective
