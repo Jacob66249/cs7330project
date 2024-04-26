@@ -10,6 +10,7 @@ urlpatterns = [
     path("degree/delete_degree/", views.delete_degree, name="delete_degree"),
     path("degree/<str:Name>/edit_degree/", views.edit_degree, name="edit_degree"),
     path("degreecourse/", views.list_degreecourse, name="list_degreecourse"),
+    path("degree_details/", views.degree_details, name="degree_detail"),
     # course
     path("course/", views.list_course, name="list_course"),
     path("course/add_course/", views.add_course, name="add_course"),

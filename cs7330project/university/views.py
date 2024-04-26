@@ -47,6 +47,53 @@ def delete_degree(request):
     return redirect("/degree/")
 
 
+def degree_details(request):
+    form = forms.DegreeQueryForm(request.POST or None)
+    context = {"form": form}
+
+    if request.method == "POST" and form.is_valid():
+        degree = form.cleaned_data["degree"]
+
+        if degree:
+            # Fetch courses associated with the degree
+            course_list = models.Course.objects.filter(degreecourse__degree=degree)
+            paginator_courses = Paginator(course_list, 5)  # 5 courses per page
+            courses_page_number = request.GET.get("courses_page", 1)
+            paginated_courses = paginator_courses.get_page(courses_page_number)
+
+            # Fetch sections ordered by year and semester
+            section_list = models.Section.objects.filter().order_by("-year", "semester")
+            paginator_sections = Paginator(section_list, 5)  # 5 sections per page
+            sections_page_number = request.GET.get("sections_page", 1)
+            paginated_sections = paginator_sections.get_page(sections_page_number)
+
+            # Fetch all objectives
+            objective_list = models.Objective.objects.all()
+            paginator_objectives = Paginator(objective_list, 5)  # 5 objectives per page
+            objectives_page_number = request.GET.get("objectives_page", 1)
+            paginated_objectives = paginator_objectives.get_page(objectives_page_number)
+
+            # Map objectives to courses
+            objectives_courses = {}
+            for objective in paginated_objectives:
+                objectives_courses[objective] = models.Course.objects.filter(
+                    objective=objective
+                )
+
+            # Update context with paginated data
+            context.update(
+                {
+                    "degree": degree,
+                    "courses": paginated_courses,
+                    "sections": paginated_sections,
+                    "objectives": paginated_objectives,
+                    "objectives_courses": objectives_courses,
+                }
+            )
+
+    return render(request, "degree/degree_details.html", context)
+
+
 # DegreeCourse
 def list_degreecourse(request):
     degreecourse_list = models.DegreeCourse.objects.all()
