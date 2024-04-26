@@ -10,3 +10,8 @@ urlpatterns = [
     path("course/delete_course/", views.delete_course, name="delete_course"),
     path("course/<str:Course_Id>/edit_course/", views.edit_course, name="edit_course"),
 ]
+
+urlpatterns = [
+    path('evaluation/enter/<int:section_id>/', enter_evaluation, name='enter_evaluation'),
+    path('evaluation/update/<int:evaluation_id>/', update_evaluation, name='update_evaluation'),
+]

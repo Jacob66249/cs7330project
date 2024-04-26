@@ -1,7 +1,8 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
 from university import models
-
+from .forms import EvaluationForm
+from .models import Course, Section, Evaluation
 
 # home
 def home(request):
@@ -37,3 +38,36 @@ def edit_course(request, Course_Id):
     Name = request.POST.get("name")
     models.Course.objects.filter(course_id=Course_Id).update(name=Name)
     return redirect("/course/")
+
+# evaluation
+def enter_evaluation(request, section_id):
+    section = get_object_or_404(Section, pk=section_id)
+    course = section.course
+    if request.method == "POST":
+        form = EvaluationForm(request.POST)
+        if form.is_valid():
+            evaluation = form.save(commit=False)
+            evaluation.course = course
+            evaluation.section = section
+            evaluation.degree_name = course.degree.name
+            evaluation.degree_level = course.degree.level
+            evaluation.save()
+            return redirect('evaluation-list')  # Redirect to an appropriate page
+    else:
+        form = EvaluationForm()
+    return render(request, 'enter_evaluation.html', {
+        'form': form,
+        'section': section,
+        'course': course
+    })
+
+def update_evaluation(request, evaluation_id):
+    evaluation = get_object_or_404(Evaluation, pk=evaluation_id)
+    if request.method == "POST":
+        form = EvaluationForm(request.POST, instance=evaluation)
+        if form.is_valid():
+            form.save()
+            return redirect('evaluation-list')  # Redirect to an appropriate page
+    else:
+        form = EvaluationForm(instance=evaluation)
+    return render(request, 'update_evaluation.html', {'form': form, 'evaluation': evaluation})

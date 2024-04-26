@@ -1,0 +1,16 @@
+{% extends "default.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2>Update Evaluation for {{ evaluation.course.name }} - Section {{ evaluation.section.number }}</h2>
+    <form class="form-horizontal" method="post">
+        {% csrf_token %}
+        <a href="{% url 'evaluation-list' %}" class="btn btn-secondary">Back to Evaluations</a>
+        {{ form.as_p }}
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-success">Save Changes</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
