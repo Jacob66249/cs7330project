@@ -3,38 +3,58 @@
   <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
   <div class="d-flex justify-content-between align-items-center">
     <h2 class="mb-2">Degree Course</h2>
-    <a class="btn btn-primary mb-1" href="#"
-      >Add new Degree Course</a
-    >
+    <a class="btn btn-primary mb-1" href="#">Add new Degree Course</a>
   </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-              <th scope="col">Is_Core</th>
-              <th scope="col">Course_Id</th>
-              <th scope="col">Degree_Id</th>
-              <th scope="col">Degree_name</th>
-              <th scope="col">Degree_Level</th>
-              <th scope="col">Operations</th>
-            </tr>
-          </thead>
-          <tbody>
-          {% for obj in queryset %}
-            <tr>
-                <td>{{obj.is_core}}</td>
-                <td>{{obj.course_id}}</td>
-                <td>{{obj.degree_id}}</td>
-                <td>{{obj.degree.name}}</td>
-                <td>{{obj.degree.level}}</td>
-                <td>
-                  <a class="btn btn-primary"href="#">Edit</a>
-                  <a class="btn btn-danger" href="#">X</a>
-                </td>
-            </tr>
-            {% endfor %}
-          </tbody>
-    </table>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Is_Core</th>
+        <th scope="col">Course_Id</th>
+        <th scope="col">Degree_Id</th>
+        <th scope="col">Degree_name</th>
+        <th scope="col">Degree_Level</th>
+        <th scope="col">Operations</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for obj in page_obj %}
+      <tr>
+        <td>{{ obj.is_core }}</td>
+        <td>{{ obj.course_id }}</td>
+        <td>{{ obj.degree_id }}</td>
+        <td>{{ obj.degree.name }}</td>
+        <td>{{ obj.degree.level }}</td>
+        <td>
+          <a class="btn btn-primary" href="#">Edit</a>
+          <a class="btn btn-danger" href="#">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+      <a
+        class="btn btn-outline-primary"
+        href="?page={{ page_obj.previous_page_number }}"
+        >Previous</a
+      >
+      {% endif %}
+
+      <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+      <a
+        class="btn btn-outline-primary"
+        href="?page={{ page_obj.next_page_number }}"
+        >Next</a
+      >
+      {% endif %}
+    </span>
   </div>
 </div>
 {% endblock %}

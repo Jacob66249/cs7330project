@@ -1,5 +1,6 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 from university import models, forms
 from .models import Evaluation, Section
 from .forms import EvaluationForm
@@ -12,8 +13,13 @@ def home(request):
 
 # Degree
 def list_degree(request):
-    queryset = models.Degree.objects.all()
-    return render(request, "degree/degree_list.html", {"queryset": queryset})
+    degree_list = models.Degree.objects.all()
+    paginator = Paginator(degree_list, 8)  # Display 8 degrees per page
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, "degree/degree_list.html", {"page_obj": page_obj})
 
 
 def add_degree(request):
@@ -43,18 +49,75 @@ def delete_degree(request):
     return redirect("/degree/")
 
 
+def degree_details(request):
+    form = forms.DegreeQueryForm(request.POST or None)
+    context = {"form": form}
+
+    if request.method == "POST" and form.is_valid():
+        degree = form.cleaned_data["degree"]
+
+        if degree:
+            # Fetch courses associated with the degree
+            course_list = models.Course.objects.filter(degreecourse__degree=degree)
+            paginator_courses = Paginator(course_list, 5)  # 5 courses per page
+            courses_page_number = request.GET.get("courses_page", 1)
+            paginated_courses = paginator_courses.get_page(courses_page_number)
+
+            # Fetch sections ordered by year and semester
+            section_list = models.Section.objects.filter().order_by("-year", "semester")
+            paginator_sections = Paginator(section_list, 5)  # 5 sections per page
+            sections_page_number = request.GET.get("sections_page", 1)
+            paginated_sections = paginator_sections.get_page(sections_page_number)
+
+            # Fetch all objectives
+            objective_list = models.Objective.objects.all()
+            paginator_objectives = Paginator(objective_list, 5)  # 5 objectives per page
+            objectives_page_number = request.GET.get("objectives_page", 1)
+            paginated_objectives = paginator_objectives.get_page(objectives_page_number)
+
+            # Map objectives to courses
+            objectives_courses = {}
+            for objective in paginated_objectives:
+                objectives_courses[objective] = models.Course.objects.filter(
+                    objective=objective
+                )
+
+            # Update context with paginated data
+            context.update(
+                {
+                    "degree": degree,
+                    "courses": paginated_courses,
+                    "sections": paginated_sections,
+                    "objectives": paginated_objectives,
+                    "objectives_courses": objectives_courses,
+                }
+            )
+
+    return render(request, "degree/degree_details.html", context)
+
+
 # DegreeCourse
 def list_degreecourse(request):
-    queryset = models.DegreeCourse.objects.all()
+    degreecourse_list = models.DegreeCourse.objects.all()
+    paginator = Paginator(degreecourse_list, 8)  # Display 8 degree courses per page
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     return render(
-        request, "degreecourse/degreecourse_list.html", {"queryset": queryset}
+        request, "degreecourse/degreecourse_list.html", {"page_obj": page_obj}
     )
 
 
 # Course
 def list_course(request):
-    queryset = models.Course.objects.all().order_by("course_id")
-    return render(request, "course/course_list.html", {"queryset": queryset})
+    course_list = models.Course.objects.all().order_by("course_id")
+    paginator = Paginator(course_list, 8)  # Display 8 courses per page
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, "course/course_list.html", {"page_obj": page_obj})
 
 
 def add_course(request):
@@ -81,84 +144,83 @@ def edit_course(request, Course_Id):
     models.Course.objects.filter(course_id=Course_Id).update(name=Name)
     return redirect("/course/")
 
-# evaluation
-def add_evaluation(request):
-    if request.method == 'POST':
-        form = EvaluationForm(request.POST)
-        if form.is_valid():
-            section_id = form.cleaned_data.get('section_id')
-            try:
-                section = Section.objects.get(id=section_id)
-            except Section.DoesNotExist:
-                return render(request, 'error_page.html', {
-                    'error': '指定的部分不存在。'
-                })
 
-            evaluation = form.save(commit=False)
-            evaluation.section = section
-            evaluation.save()
-            return redirect('evaluation-list')  # Redirect to the evaluation listing page
-    else:
-        form = EvaluationForm()
-    return render(request, 'evaluation/add_evaluation.html', {'form': form})
+def course_detail(request):
+    form = forms.QueryCourseForm(request.POST or None)
+    sections = None
 
-def enter_evaluation(request, section_id):
-    section = get_object_or_404(Section, pk=section_id)
-    course = section.course
-    if request.method == "POST":
-        form = EvaluationForm(request.POST)
-        if form.is_valid():
-            evaluation = form.save(commit=False)
-            evaluation.course = course
-            evaluation.section = section
-            evaluation.degree_name = course.degree.name
-            evaluation.degree_level = course.degree.level
-            evaluation.save()
-            return redirect('evaluation/evaluation-list')  # Redirect to an appropriate page
-    else:
-        form = EvaluationForm()
-    return render(request, 'evaluation/enter_evaluation.html', {
-        'form': form,
-        'section': section,
-        'course': course
-    })
+    if request.method == "POST" and form.is_valid():
+        course = form.cleaned_data["course"]
+        year = form.cleaned_data["year"]
+        semester = form.cleaned_data["semester"]
+        sections = models.Section.objects.filter(
+            course=course, year=year, semester=semester
+        )
+    return render(
+        request, "course/course_details.html", {"form": form, "sections": sections}
+    )
 
-def update_evaluation(request, evaluation_id):
-    evaluation = get_object_or_404(Evaluation, pk=evaluation_id)
-    if request.method == "POST":
-        form = EvaluationForm(request.POST, instance=evaluation)
-        if form.is_valid():
-            form.save()
-            return redirect('evaluation/evaluation-list')  # Redirect to an appropriate page
-    else:
-        form = EvaluationForm(instance=evaluation)
-    return render(request, 'evaluation/update_evaluation.html', {'form': form, 'evaluation': evaluation})
 
 # Instructor
 def list_instructor(request):
-    queryset = models.Instructor.objects.all()
-    return render(request, "instructor/instructor_list.html", {"queryset": queryset})
+    instructor_list = models.Instructor.objects.all()
+    paginator = Paginator(instructor_list, 8)  # Display 8 instructors per page
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, "instructor/instructor_list.html", {"page_obj": page_obj})
+
+
+def instructor_details(request):
+    form = forms.QueryInstructorForm(request.POST or None)
+    sections = None
+    if request.method == "POST" and form.is_valid():
+        instructor = form.cleaned_data["instructor"]
+        year = form.cleaned_data["year"]
+        semester = form.cleaned_data["semester"]
+        sections = models.Section.objects.filter(
+            instructor=instructor, year=year, semester=semester
+        )
+
+    return render(
+        request,
+        "instructor/instructor_details.html",
+        {"form": form, "sections": sections},
+    )
 
 
 # Section
 def list_section(request):
-    queryset = models.Section.objects.all()
-    return render(request, "section/section_list.html", {"queryset": queryset})
+    section_list = models.Section.objects.all()
+    paginator = Paginator(section_list, 8)  # Display 8 sections per page
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, "section/section_list.html", {"page_obj": page_obj})
 
 
 # Objective
 def list_objective(request):
-    queryset = models.Objective.objects.all()
-    return render(request, "objective/objective_list.html", {"queryset": queryset})
+    objective_list = models.Objective.objects.all()
+    paginator = Paginator(objective_list, 8)  # Display 8 objectives per page
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, "objective/objective_list.html", {"page_obj": page_obj})
 
 
 # Evaluation
 def list_evaluation(request):
-    queryset = models.Evaluation.objects.all()
-    return render(request, "evaluation/evaluation_list.html", {"queryset": queryset})
+    evaluation_list = models.Evaluation.objects.all()
+    paginator = Paginator(evaluation_list, 8)
 
-def your_evaluation_view(request):
-    queryset = Evaluation.objects.all()
-    print("SQL Query:", queryset.query)  # 打印 SQL 查询看看实际执行的 SQL
-    print("Data exists:", queryset.exists())  # 检查查询集是否有数据
-    return render(request, 'your_template.html', {'queryset': queryset})
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, "evaluation/evaluation_list.html", {"page_obj": page_obj})
+
+
+# Query involving evaluation

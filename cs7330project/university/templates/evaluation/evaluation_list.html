@@ -4,6 +4,8 @@
   <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
   <div class="d-flex justify-content-between align-items-center">
     <h2 class="mb-0">Evaluation</h2>
+    <a class="btn btn-warning mb-4" href="#">Entering evaluation</a>
+    <a class="btn btn-primary mb-4" href="#">Add new Evaluations</a>
     <!-- Adjusted for adding new evaluations; ideally, this should link to a general form not tied to a specific ID -->
     <a class="btn btn-primary mb-4" href="{% url 'add_evaluation' %}">Add new Evaluations</a>
   </div>
@@ -39,13 +41,27 @@
         <td>{{ obj.section_id }}</td>
         <td>{{ obj.degree_name }}</td>
         <td>{{ obj.degree_level }}</td>
+        <td>{{ obj.levelA_stu_num }}</td>
+        <td>{{ obj.levelB_stu_num }}</td>
+        <td>{{ obj.levelC_stu_num }}</td>
+        <td>{{ obj.levelF_stu_num }}</td>
+        <td>{{ obj.improvement_suggestions }}</td>
+        <td>{{ obj.course_id }}</td>
+        <td>{{ obj.section_id }}</td>
+        <td>{{ obj.degree_name }}</td>
+        <td>{{ obj.degree_level }}</td>
         <td>
+          <a class="btn btn-primary" href="#">Edit</a>
+          <a class="btn btn-danger" href="#">Delete</a>
           <a class="btn btn-warning" href="{% url 'enter_evaluation' section_id=obj.section_id %}">Enter Evaluation</a>
           <a class="btn btn-primary" href="{% url 'update_evaluation' evaluation_id=obj.evaluate_id %}">Edit</a>
           <a class="btn btn-danger" href="{% url 'delete_evaluation' evaluation_id=obj.evaluate_id %}">Delete</a>
         </td>
       </tr>
       {% endfor %}
+    </tbody>
+    </tr>
+    {% endfor %}
     </tbody>
   </table>
 </div>

@@ -20,15 +20,15 @@
       </tr>
     </thead>
     <tbody>
-      {% for obj in queryset %}
+      {% for obj in page_obj %}
       <tr>
-        <th>{{obj.section_id}}</th>
-        <td>{{obj.semester}}</td>
-        <td>{{obj.year}}</td>
-        <td>{{obj.enrolled_stu_num}}</td>
-        <td>{{obj.course_id}}</td>
-        <td>{{obj.degree_id}}</td>
-        <td>{{obj.instructor_id}}</td>
+        <th>{{ obj.section_id }}</th>
+        <td>{{ obj.semester }}</td>
+        <td>{{ obj.year }}</td>
+        <td>{{ obj.enrolled_stu_num }}</td>
+        <td>{{ obj.course_id }}</td>
+        <td>{{ obj.degree_id }}</td>
+        <td>{{ obj.instructor_id }}</td>
         <td>
           <a class="btn btn-primary" href="{% url 'enter_evaluation' section_id=obj.section_id %}">Enter Evaluation</a>
           <a class="btn btn-danger" href="#">Delete</a>
@@ -37,5 +37,28 @@
       {% endfor %}
     </tbody>
   </table>
+  <div class="pagination">
+    <span class="step-links">
+      {% if page_obj.has_previous %}
+      <a
+        class="btn btn-outline-primary"
+        href="?page={{ page_obj.previous_page_number }}"
+        >previous</a
+      >
+      {% endif %}
+
+      <span class="current">
+        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+      <a
+        class="btn btn-outline-primary"
+        href="?page={{ page_obj.next_page_number }}"
+        >next</a
+      >
+      {% endif %}
+    </span>
+  </div>
 </div>
 {% endblock %}

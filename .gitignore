@@ -1,3 +1,11 @@
-.env
+/shelf/
+/workspace.xml
+/httpRequests/
+/dataSources/
+/dataSources.local.xml
+# Ignore Python cache and virtual environment files
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+venv/
