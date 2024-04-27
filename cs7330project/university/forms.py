@@ -42,7 +42,8 @@ class SelectInstructorSectionForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         super(SelectInstructorSectionForm, self).__init__(*args, **kwargs)
-        # Optionally, add any dynamic adjustments here if needed
+        self.fields['instructor'].label_from_instance = lambda obj: obj.name
+        self.fields['degree'].label_from_instance = lambda obj: f"{obj.name} ({obj.level})"
 
 class DegreeQueryForm(forms.Form):
     degree = forms.ModelChoiceField(
