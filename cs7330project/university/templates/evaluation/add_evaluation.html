@@ -1,0 +1,13 @@
+{% extends "default.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Add New Evaluation</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Save Evaluation</button>
+        <a href="{% url 'list_evaluation' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

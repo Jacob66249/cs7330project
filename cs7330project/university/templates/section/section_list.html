@@ -30,7 +30,7 @@
         <td>{{obj.degree_id}}</td>
         <td>{{obj.instructor_id}}</td>
         <td>
-          <a class="btn btn-primary" href="#">Edit</a>
+          <a class="btn btn-primary" href="{% url 'enter_evaluation' section_id=obj.section_id %}">Enter Evaluation</a>
           <a class="btn btn-danger" href="#">Delete</a>
         </td>
       </tr>

@@ -85,9 +85,11 @@ class Evaluation(models.Model):
     degree_level = models.CharField(max_length=50, default="Default Level")
 
     def save(self, *args, **kwargs):
-        if not self.pk:
-            self.degree_name = self.degree.name
-            self.degree_level = self.degree.level
+        if self.section:
+            self.degree_name = self.section.degree.name
+            self.degree_level = self.section.degree.level
+        else:
+            raise ValueError("Section must be set before saving Evaluation.")
         super().save(*args, **kwargs)
 
 

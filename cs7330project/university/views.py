@@ -1,7 +1,8 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect
-from university import models
 from university import models, forms
+from .models import Evaluation, Section
+from .forms import EvaluationForm
 
 
 # home
@@ -81,6 +82,26 @@ def edit_course(request, Course_Id):
     return redirect("/course/")
 
 # evaluation
+def add_evaluation(request):
+    if request.method == 'POST':
+        form = EvaluationForm(request.POST)
+        if form.is_valid():
+            section_id = form.cleaned_data.get('section_id')
+            try:
+                section = Section.objects.get(id=section_id)
+            except Section.DoesNotExist:
+                return render(request, 'error_page.html', {
+                    'error': '指定的部分不存在。'
+                })
+
+            evaluation = form.save(commit=False)
+            evaluation.section = section
+            evaluation.save()
+            return redirect('evaluation-list')  # Redirect to the evaluation listing page
+    else:
+        form = EvaluationForm()
+    return render(request, 'evaluation/add_evaluation.html', {'form': form})
+
 def enter_evaluation(request, section_id):
     section = get_object_or_404(Section, pk=section_id)
     course = section.course
@@ -93,10 +114,10 @@ def enter_evaluation(request, section_id):
             evaluation.degree_name = course.degree.name
             evaluation.degree_level = course.degree.level
             evaluation.save()
-            return redirect('evaluation-list')  # Redirect to an appropriate page
+            return redirect('evaluation/evaluation-list')  # Redirect to an appropriate page
     else:
         form = EvaluationForm()
-    return render(request, 'enter_evaluation.html', {
+    return render(request, 'evaluation/enter_evaluation.html', {
         'form': form,
         'section': section,
         'course': course
@@ -108,10 +129,10 @@ def update_evaluation(request, evaluation_id):
         form = EvaluationForm(request.POST, instance=evaluation)
         if form.is_valid():
             form.save()
-            return redirect('evaluation-list')  # Redirect to an appropriate page
+            return redirect('evaluation/evaluation-list')  # Redirect to an appropriate page
     else:
         form = EvaluationForm(instance=evaluation)
-    return render(request, 'update_evaluation.html', {'form': form, 'evaluation': evaluation})
+    return render(request, 'evaluation/update_evaluation.html', {'form': form, 'evaluation': evaluation})
 
 # Instructor
 def list_instructor(request):
@@ -135,3 +156,9 @@ def list_objective(request):
 def list_evaluation(request):
     queryset = models.Evaluation.objects.all()
     return render(request, "evaluation/evaluation_list.html", {"queryset": queryset})
+
+def your_evaluation_view(request):
+    queryset = Evaluation.objects.all()
+    print("SQL Query:", queryset.query)  # 打印 SQL 查询看看实际执行的 SQL
+    print("Data exists:", queryset.exists())  # 检查查询集是否有数据
+    return render(request, 'your_template.html', {'queryset': queryset})

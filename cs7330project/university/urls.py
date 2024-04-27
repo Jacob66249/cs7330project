@@ -23,9 +23,8 @@ urlpatterns = [
     path("objective/", views.list_objective, name="list_objective"),
     # Evaluation
     path("evaluation/", views.list_evaluation, name="list_evaluation"),
-]
-
-urlpatterns = [
-    path('evaluation/enter/<int:section_id>/', enter_evaluation, name='enter_evaluation'),
-    path('evaluation/update/<int:evaluation_id>/', update_evaluation, name='update_evaluation'),
+    # Evaluation Detail Views
+    path('evaluation/add/', views.add_evaluation, name='add_evaluation'),
+    path('evaluation/enter/<int:section_id>/', views.enter_evaluation, name='enter_evaluation'),
+    path('evaluation/update/<int:evaluation_id>/', views.update_evaluation, name='update_evaluation'),
 ]
