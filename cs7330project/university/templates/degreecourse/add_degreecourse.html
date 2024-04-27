@@ -1,0 +1,74 @@
+{% extends "default.html" %} {% block content %}
+<div class="container mt-4">
+  <form class="form-horizontal" method="post">
+    {% csrf_token %}
+    <a href="{% url 'list_degreecourse' %}" class="btn btn-secondary"
+      >Back to DegreeCourse List</a
+    >
+    <div class="d-flex justify-content-between align-items-center">
+      <h2 class="mb-0">Add DegreeCourse</h2>
+    </div>
+
+    <div class="form-group mb-4">
+      <label class="col-sm-2 control-label">Degree Id</label>
+      <div class="col-sm-5">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter your degree"
+          name="level"
+        />
+      </div>
+    </div>
+    <div class="form-group mb-4">
+      <label class="col-sm-2 control-label">Course Id</label>
+      <div class="col-sm-5">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter your course"
+          name="name"
+        />
+      </div>
+    </div>
+    <div class="form-group mb-4">
+      <label class="col-sm-2 control-label">is_core</label>
+      <div class="col-sm-5">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="is_core"
+          name="level"
+        />
+      </div>
+    </div>
+    <div class="form-group mb-4">
+      <label class="col-sm-2 control-label">Degree name</label>
+      <div class="col-sm-5">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter your degree name"
+          name="name"
+        />
+      </div>
+    </div>
+    <div class="form-group mb-4">
+      <label class="col-sm-2 control-label">Degree level</label>
+      <div class="col-sm-5">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Enter your degree level"
+          name="level"
+        />
+      </div>
+    </div>
+    <div class="form-group mb-4">
+      <div class="col-sm-offset-2 col-sm-10 d-flex justify-content-between">
+        <button type="submit" class="btn btn-primary mb-2">Add</button>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
