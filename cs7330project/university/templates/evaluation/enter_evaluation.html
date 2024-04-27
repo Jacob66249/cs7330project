@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container mt-4">
     <a href="{% url 'home' %}" class="btn btn-secondary mb-4">Back to Home</a>
-
+    <a href="{% url 'list_evaluation' %}" class="btn btn-primary mb-4">All Evaluations</a>
     <!-- Search form -->
     <form method="post" class="form-row align-items-center">
         {% csrf_token %}

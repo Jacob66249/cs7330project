@@ -30,6 +30,7 @@ urlpatterns = [
     path("objective/", views.list_objective, name="list_objective"),
     # Evaluation
     path("evaluation/", views.enter_evaluation, name="enter_evaluation"),
+    path("evaluation/evaluation_list", views.list_evaluation, name="list_evaluation"),
     # Evaluation Detail Views
     path('evaluation/add/', views.add_evaluation, name='add_evaluation'),
     path('evaluation/enter/<int:section_id>/', views.enter_evaluation, name='enter_evaluation'),
