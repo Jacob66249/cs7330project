@@ -97,6 +97,24 @@ def degree_details(request):
 
 
 # DegreeCourse
+def add_degreecourse(request):
+    if request.method == "GET":
+        return render(request, "degreecourse/add_degreecourse.html")
+    degree = request.POST.get("degree")
+    course = request.POST.get("course")
+    is_core = request.POST.get("is_core")
+    degree_name = request.POST.get("degree_name")
+    degree_level = request.POST.get("degree_levl")
+    models.DegreeCourse.objects.create(
+        degree=degree,
+        course=course,
+        is_core=is_core,
+        degree_name=degree_name,
+        degree_level=degree_level,
+    )
+    return redirect("/degreecourse/")
+
+
 def list_degreecourse(request):
     degreecourse_list = models.DegreeCourse.objects.all()
     paginator = Paginator(degreecourse_list, 8)  # Display 8 degree courses per page
@@ -162,6 +180,15 @@ def course_detail(request):
 
 
 # Instructor
+def add_instructor(request):
+    if request.method == "GET":
+        return render(request, "instructor/add_instructor.html")
+    id = request.POST.get("id")
+    name = request.POST.get("name")
+    models.Instructor.objects.create(name=name, id=id)
+    return redirect("/instructor/")
+
+
 def list_instructor(request):
     instructor_list = models.Instructor.objects.all()
     paginator = Paginator(instructor_list, 8)  # Display 8 instructors per page
