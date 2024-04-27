@@ -20,6 +20,29 @@ class EvaluationForm(forms.ModelForm):
         }
 from .models import Course, Section, Instructor, Degree
 
+class SelectInstructorSectionForm(forms.Form):
+    instructor = forms.ModelChoiceField(
+        queryset=Instructor.objects.all(),
+        label="Instructor",
+        help_text="Select an instructor",
+        required=True
+    )
+    degree = forms.ModelChoiceField(
+        queryset=Degree.objects.all(),
+        label="Degree",
+        help_text="Select a degree",
+        required=True
+    )
+    semester = forms.ChoiceField(
+        choices=Section.SEMESTER_CHOICES,
+        label="Semester",
+        help_text="Select the semester",
+        required=True
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(SelectInstructorSectionForm, self).__init__(*args, **kwargs)
+        # Optionally, add any dynamic adjustments here if needed
 
 class DegreeQueryForm(forms.Form):
     degree = forms.ModelChoiceField(

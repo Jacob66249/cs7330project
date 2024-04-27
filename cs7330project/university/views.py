@@ -1,9 +1,9 @@
 from django.http import HttpResponse, Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.core.paginator import Paginator
 from university import models, forms
-from .models import Evaluation, Section
-from .forms import EvaluationForm
+from .models import Instructor, Section, Degree, Evaluation
+from .forms import EvaluationForm,SelectInstructorSectionForm
 
 
 # home
@@ -269,26 +269,47 @@ def add_evaluation(request):
         form = EvaluationForm()
     return render(request, 'evaluation/add_evaluation.html', {'form': form})
 
-def enter_evaluation(request, section_id):
-    section = get_object_or_404(Section, pk=section_id)
-    course = section.course
+def enter_evaluation(request):
+    select_form = SelectInstructorSectionForm(request.POST or None)
+    eval_form = EvaluationForm(request.POST or None)
+    evaluations = None
+    search_performed = False
+
     if request.method == "POST":
-        form = EvaluationForm(request.POST)
-        if form.is_valid():
-            evaluation = form.save(commit=False)
-            evaluation.course = course
-            evaluation.section = section
-            evaluation.degree_name = course.degree.name
-            evaluation.degree_level = course.degree.level
-            evaluation.save()
-            return redirect('evaluation/evaluation-list')  # Redirect to an appropriate page
-    else:
-        form = EvaluationForm()
-    return render(request, 'evaluation/enter_evaluation.html', {
-        'form': form,
-        'section': section,
-        'course': course
-    })
+        if 'search' in request.POST:
+            if select_form.is_valid():
+                instructor = select_form.cleaned_data['instructor']
+                degree = select_form.cleaned_data['degree']
+                semester = select_form.cleaned_data['semester']
+
+                sections = Section.objects.filter(
+                    instructor=instructor, semester=semester, degree=degree
+                )
+
+                evaluations = [{
+                    "section": section,
+                    "evaluation": Evaluation.objects.filter(section=section).first(),
+                } for section in sections]
+
+        elif 'submit_evaluation' in request.POST:
+            eval_form = EvaluationForm(request.POST)
+            if eval_form.is_valid():
+                evaluation = eval_form.save(commit=False)
+                section_id = eval_form.cleaned_data['section']
+                evaluation.section = get_object_or_404(Section, pk=section_id)
+                evaluation.save()
+                return redirect('evaluation-list')
+        else:
+            eval_form = EvaluationForm()
+
+    context = {
+        'select_form': select_form,
+        'eval_form': eval_form,
+        'evaluations': evaluations,
+        'search_performed': search_performed, 
+    }
+    return render(request, "evaluation/enter_evaluation.html", context)
+
 
 def update_evaluation(request, evaluation_id):
     evaluation = get_object_or_404(Evaluation, pk=evaluation_id)

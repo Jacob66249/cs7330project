@@ -1,16 +1,62 @@
 {% extends "default.html" %}
 {% block content %}
 <div class="container mt-4">
-    <h2>Enter Evaluation for {{ course.name }} - Section {{ section.number }}</h2>
-    <form class="form-horizontal" method="post">
+    <a href="{% url 'home' %}" class="btn btn-secondary mb-4">Back to Home</a>
+
+    <!-- Search form -->
+    <form method="post" class="form-row align-items-center">
         {% csrf_token %}
-        <a href="{% url 'evaluation-list' %}" class="btn btn-secondary">Back to Evaluations</a>
-        {{ form.as_p }}
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary">Submit Evaluation</button>
-            </div>
-        </div>
+        {{ select_form.as_p }}
+        <button type="submit" name="search" class="btn btn-primary">Search</button>
     </form>
+
+    <!-- Evaluation form (only shows if there are sections to evaluate) -->
+    {% if evaluations %}
+    <form method="post">
+        {% csrf_token %}
+        {{ eval_form.as_p }}
+        <button type="submit" name="submit_evaluation" class="btn btn-success">Submit Evaluation</button>
+    </form>
+    {% endif %}
+
+    <h2>Sections Taught by Instructor</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Semester</th>
+                    <th>Year</th>
+                    <th>Course</th>
+                    <th>Section ID</th>
+                    <th>Evaluation Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if search_performed %}
+                {% if evaluations %}
+                {% for eval in evaluations %}
+                <tr>
+                    <td>{{ eval.section.semester }}</td>
+                    <td>{{ eval.section.year }}</td>
+                    <td>{{ eval.section.course.name }}</td>
+                    <td>{{ eval.section.section_id }}</td>
+                    <td>{{ eval.evaluation|default:"Not Entered" }}</td>
+                    <td>
+                        <a href="{% url 'enter_evaluation' section_id=eval.section.id %}"
+                            class="btn btn-warning">Enter/Edit
+                            Evaluation</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="6">No evaluations found. Please adjust your search criteria.</td>
+                </tr>
+                {% endif %}
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
 </div>
 {% endblock %}
