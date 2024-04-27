@@ -1,5 +1,5 @@
 from django import forms
-from .models import Course, Section, Instructor, Degree
+from .models import Course, Section, Instructor, Degree,Evaluation
 
 class EvaluationForm(forms.ModelForm):
     section = forms.ModelChoiceField(queryset=Section.objects.all(), required=True, label="Section", help_text="Select the section for the evaluation")

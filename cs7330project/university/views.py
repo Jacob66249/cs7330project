@@ -222,5 +222,56 @@ def list_evaluation(request):
 
     return render(request, "evaluation/evaluation_list.html", {"page_obj": page_obj})
 
+def add_evaluation(request):
+    if request.method == 'POST':
+        form = EvaluationForm(request.POST)
+        if form.is_valid():
+            section_id = form.cleaned_data.get('section_id')
+            try:
+                section = Section.objects.get(id=section_id)
+            except Section.DoesNotExist:
+                return render(request, 'error_page.html', {
+                    'error': '指定的部分不存在。'
+                })
+
+            evaluation = form.save(commit=False)
+            evaluation.section = section
+            evaluation.save()
+            return redirect('evaluation-list')  # Redirect to the evaluation listing page
+    else:
+        form = EvaluationForm()
+    return render(request, 'evaluation/add_evaluation.html', {'form': form})
+
+def enter_evaluation(request, section_id):
+    section = get_object_or_404(Section, pk=section_id)
+    course = section.course
+    if request.method == "POST":
+        form = EvaluationForm(request.POST)
+        if form.is_valid():
+            evaluation = form.save(commit=False)
+            evaluation.course = course
+            evaluation.section = section
+            evaluation.degree_name = course.degree.name
+            evaluation.degree_level = course.degree.level
+            evaluation.save()
+            return redirect('evaluation/evaluation-list')  # Redirect to an appropriate page
+    else:
+        form = EvaluationForm()
+    return render(request, 'evaluation/enter_evaluation.html', {
+        'form': form,
+        'section': section,
+        'course': course
+    })
+
+def update_evaluation(request, evaluation_id):
+    evaluation = get_object_or_404(Evaluation, pk=evaluation_id)
+    if request.method == "POST":
+        form = EvaluationForm(request.POST, instance=evaluation)
+        if form.is_valid():
+            form.save()
+            return redirect('evaluation/evaluation-list')  # Redirect to an appropriate page
+    else:
+        form = EvaluationForm(instance=evaluation)
+    return render(request, 'evaluation/update_evaluation.html', {'form': form, 'evaluation': evaluation})
 
 # Query involving evaluation
