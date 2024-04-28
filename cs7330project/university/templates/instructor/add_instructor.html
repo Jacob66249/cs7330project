@@ -1,28 +1,23 @@
 {% extends "default.html" %} {% block content %}
 <div class="container mt-4">
-    <form class="form-horizontal" method="post">
-        {% csrf_token %}
   <a href="{% url 'list_instructor' %}" class="btn btn-secondary">Back to Instructor List</a>
   <div class="d-flex justify-content-between align-items-center">
     <h2 class="mb-0">Add Instructors</h2>
   </div>
-  <div class="form-group mb-4">
-    <label class="col-sm-2 control-label">Name</label>
-    <div class="col-sm-5">
-      <input type="text" class="form-control" placeholder="Enter your name" name="level">
-    </div>
-  </div>
-  <div class="form-group mb-4">
-    <label class="col-sm-2 control-label">ID</label>
-    <div class="col-sm-5">
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Enter your id"
-        name="name"
-      />
-    </div>
-  </div>
+  <form class="form-horizontal" method="post">
+      {% csrf_token %}
+      <div class="form-group mb-4">
+        <label class="col-sm-2 control-label">Id</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" placeholder="Enter your Id" name="id">
+        </div>
+      </div>
+      <div class="form-group mb-4">
+        <label class="col-sm-2 control-label">Name</label>
+        <div class="col-sm-5">
+          <input type="text" class="form-control" placeholder="Enter your Name" name="name">
+        </div>
+      </div>
   <div class="form-group mb-4">
     <div class="col-sm-offset-2 col-sm-10 d-flex justify-content-between">
       <button type="submit" class="btn btn-primary mb-2">Add</button>

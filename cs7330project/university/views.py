@@ -98,22 +98,6 @@ def degree_details(request):
 
 
 # DegreeCourse
-def add_degreecourse(request):
-    if request.method == "GET":
-        return render(request, "degreecourse/add_degreecourse.html")
-    degree = request.POST.get("degree")
-    course = request.POST.get("course")
-    is_core = request.POST.get("is_core")
-    degree_name = request.POST.get("degree_name")
-    degree_level = request.POST.get("degree_levl")
-    models.DegreeCourse.objects.create(
-        degree=degree,
-        course=course,
-        is_core=is_core,
-        degree_name=degree_name,
-        degree_level=degree_level,
-    )
-    return redirect("/degreecourse/")
 
 
 def list_degreecourse(request):
@@ -184,9 +168,9 @@ def course_detail(request):
 def add_instructor(request):
     if request.method == "GET":
         return render(request, "instructor/add_instructor.html")
-    id = request.POST.get("id")
-    name = request.POST.get("name")
-    models.Instructor.objects.create(name=name, id=id)
+    Id = request.POST.get("id")
+    Name = request.POST.get("name")
+    models.Instructor.objects.create(id=Id, name=Name)
     return redirect("/instructor/")
 
 
