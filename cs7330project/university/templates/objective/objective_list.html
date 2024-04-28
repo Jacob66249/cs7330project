@@ -3,7 +3,9 @@
   <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
   <div class="d-flex justify-content-between align-items-center">
     <h2 class="mb-0">Objective</h2>
-    <a class="btn btn-primary mb-1" href="#">Add new Objectives</a>
+    <a class="btn btn-primary mb-1" href="{% url 'add_objective' %}"
+      >Add new Objectives</a
+    >
   </div>
 
   <table class="table">
@@ -13,7 +15,6 @@
         <th scope="col">Title</th>
         <th scope="col">Description</th>
         <th scope="col">Course_Id</th>
-        <th scope="col"></th>
       </tr>
     </thead>
     <tbody>
@@ -23,10 +24,6 @@
         <td>{{ obj.title }}</td>
         <td>{{ obj.description }}</td>
         <td>{{ obj.course_id }}</td>
-        <td>
-          <a class="btn btn-primary" href="#">Edit</a>
-          <a class="btn btn-danger" href="#">Delete</a>
-        </td>
       </tr>
       {% endfor %}
     </tbody>
