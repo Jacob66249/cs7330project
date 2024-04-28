@@ -83,7 +83,9 @@ class Evaluation(models.Model):
     section = models.ForeignKey(Section, on_delete=models.CASCADE)
     degree_name = models.CharField(max_length=255, default="Default Name")
     degree_level = models.CharField(max_length=50, default="Default Level")
-
+    is_completed = models.BooleanField(default=False)
+    improvement_needed = models.BooleanField(default=False)
+    
     def save(self, *args, **kwargs):
         if self.section:
             self.degree_name = self.section.degree.name

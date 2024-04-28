@@ -1,6 +1,7 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, redirect,get_object_or_404
 from django.core.paginator import Paginator
+from django.contrib import messages
 from university import models, forms
 from .models import Instructor, Section, Degree, Evaluation
 from .forms import EvaluationForm,SelectInstructorSectionForm
@@ -249,35 +250,33 @@ def list_evaluation(request):
 
     return render(request, "evaluation/evaluation_list.html", {"page_obj": page_obj})
 
-def add_evaluation(request):
-    if request.method == 'POST':
-        form = EvaluationForm(request.POST)
-        if form.is_valid():
-            section_id = form.cleaned_data.get('section_id')
-            try:
-                section = Section.objects.get(id=section_id)
-            except Section.DoesNotExist:
-                return render(request, 'error_page.html', {
-                    'error': '指定的部分不存在。'
-                })
-
-            evaluation = form.save(commit=False)
-            evaluation.section = section
-            evaluation.save()
-            return redirect('evaluation-list')  # Redirect to the evaluation listing page
+def save_evaluation(request, eval_id=None):
+    if eval_id:
+        evaluation = get_object_or_404(Evaluation, pk=eval_id)
+        form = EvaluationForm(request.POST or None, instance=evaluation)
     else:
-        form = EvaluationForm()
-    return render(request, 'evaluation/add_evaluation.html', {'form': form})
+        form = EvaluationForm(request.POST or None)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Evaluation saved successfully!")
+            return redirect('/evaluation/')
+        else:
+            messages.error(request, "Please correct the errors below.")
+    
+    return render(request, 'evaluation/enter_evaluation.html', {'form': form})
 
 def enter_evaluation(request):
+    search_performed = False
+    evaluations = None
     select_form = SelectInstructorSectionForm(request.POST or None)
     eval_form = EvaluationForm(request.POST or None)
-    evaluations = None
-    search_performed = False
 
     if request.method == "POST":
         if 'search' in request.POST:
             if select_form.is_valid():
+                search_performed = True
                 instructor = select_form.cleaned_data['instructor']
                 degree = select_form.cleaned_data['degree']
                 semester = select_form.cleaned_data['semester']
@@ -289,6 +288,8 @@ def enter_evaluation(request):
                 evaluations = [{
                     "section": section,
                     "evaluation": Evaluation.objects.filter(section=section).first(),
+                    "is_completed": Evaluation.objects.filter(section=section, is_completed=True).exists(),
+                "improvement_needed": Evaluation.objects.filter(section=section, improvement_needed=True).exists()
                 } for section in sections]
 
         elif 'submit_evaluation' in request.POST:
@@ -311,15 +312,21 @@ def enter_evaluation(request):
     return render(request, "evaluation/enter_evaluation.html", context)
 
 
-def update_evaluation(request, evaluation_id):
-    evaluation = get_object_or_404(Evaluation, pk=evaluation_id)
-    if request.method == "POST":
+def edit_evaluation(request, section_id):
+    section = get_object_or_404(Section, pk=section_id)
+    evaluation = Evaluation.objects.filter(section=section).first()
+
+    if request.method == 'POST':
         form = EvaluationForm(request.POST, instance=evaluation)
         if form.is_valid():
             form.save()
-            return redirect('evaluation/evaluation-list')  # Redirect to an appropriate page
+            return redirect('evaluation-list')  # 重定向到评估列表或其他适当的页面
     else:
         form = EvaluationForm(instance=evaluation)
-    return render(request, 'evaluation/update_evaluation.html', {'form': form, 'evaluation': evaluation})
 
+    context = {
+        'form': form,
+        'section': section
+    }
+    return render(request, 'evaluation/edit_evaluation.html', context)
 # Query involving evaluation
