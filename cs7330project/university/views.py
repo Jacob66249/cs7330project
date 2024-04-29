@@ -3,8 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.contrib import messages
 from university import models, forms
-from .models import Instructor, Section, Degree, Evaluation
-from .forms import EvaluationForm, SelectInstructorSectionForm
+from .models import Instructor, Section, Degree, Evaluation, DegreeCourse
+from .forms import EvaluationForm, SelectInstructorSectionForm, CopyEvaluationForm
 
 
 # home
@@ -345,21 +345,37 @@ def enter_evaluation(request):
     }
     return render(request, "evaluation/enter_evaluation.html", context)
 
-
 def edit_evaluation(request, section_id):
     section = get_object_or_404(Section, pk=section_id)
     evaluation = Evaluation.objects.filter(section=section).first()
+    course = evaluation.course if evaluation else None
 
     if request.method == "POST":
         form = EvaluationForm(request.POST, instance=evaluation)
-        if form.is_valid():
+        copy_form = CopyEvaluationForm(request.POST, course=course)
+        if form.is_valid() and copy_form.is_valid():
             form.save()
-            return redirect("evaluation-list")  # 重定向到评估列表或其他适当的页面
+            if copy_form.cleaned_data.get('copy_to_degrees'):
+                for degree in copy_form.cleaned_data['copy_to_degrees']:
+                    # 创建复制的评估对象
+                    Evaluation.objects.create(
+                        course=course,
+                        section=section,
+                        method=form.cleaned_data['method'],
+                        levelA_stu_num=form.cleaned_data['levelA_stu_num'],
+                        levelB_stu_num=form.cleaned_data['levelB_stu_num'],
+                        levelC_stu_num=form.cleaned_data['levelC_stu_num'],
+                        levelF_stu_num=form.cleaned_data['levelF_stu_num'],
+                        improvement_suggestions=form.cleaned_data['improvement_suggestions'],
+                        degree_name=degree.name,
+                        degree_level=degree.level
+                    )
+            return redirect("evaluation-list")
     else:
         form = EvaluationForm(instance=evaluation)
+        copy_form = CopyEvaluationForm(course=course)
 
-    context = {"form": form, "section": section}
+    context = {"form": form, "copy_form": copy_form, "section": section}
     return render(request, "evaluation/edit_evaluation.html", context)
-
 
 # Query involving evaluation

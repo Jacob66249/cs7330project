@@ -1,5 +1,5 @@
 from django import forms
-from .models import Course, Section, Instructor, Degree,Evaluation
+from .models import Course, Section, Instructor, Degree,Evaluation,DegreeCourse
 
 class EvaluationForm(forms.ModelForm):
     section = forms.ModelChoiceField(queryset=Section.objects.all(), required=True, label="Section", help_text="Select the section for the evaluation")
@@ -21,6 +21,22 @@ class EvaluationForm(forms.ModelForm):
         super(EvaluationForm, self).__init__(*args, **kwargs)
         self.fields['course'].label_from_instance = lambda obj: f"{obj.name} ({obj.course_id})"
 
+class CopyEvaluationForm(forms.Form):
+    copy_to_degrees = forms.ModelMultipleChoiceField(
+        queryset=DegreeCourse.objects.none(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+    )
+
+    def __init__(self, *args, **kwargs):
+        course = kwargs.pop('course', None)
+        super(CopyEvaluationForm, self).__init__(*args, **kwargs)
+        if course:
+            degrees = Degree.objects.filter(degreecourse__course=course)
+            current_degree_id = kwargs.get('current_degree_id')
+            if current_degree_id:
+                degrees = degrees.exclude(id=current_degree_id)
+            self.fields['copy_to_degrees'].queryset = degrees
 
 class SelectInstructorSectionForm(forms.Form):
     instructor = forms.ModelChoiceField(
