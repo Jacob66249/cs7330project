@@ -10,6 +10,9 @@ urlpatterns = [
     path("degree/delete_degree/", views.delete_degree, name="delete_degree"),
     path("degree/<str:Name>/edit_degree/", views.edit_degree, name="edit_degree"),
     path("degreecourse/", views.list_degreecourse, name="list_degreecourse"),
+    path(
+        "degreecourse/add_degreecourse", views.add_degreecourse, name="add_degreecourse"
+    ),
     path("degree_details/", views.degree_details, name="degree_detail"),
     # course
     path("course/", views.list_course, name="list_course"),
@@ -38,7 +41,15 @@ urlpatterns = [
     ),
     path("evaluation/save/", views.save_evaluation, name="save-evaluation"),
     path("evaluation/page/<int:page>/", views.list_evaluation, name="list_evaluation"),
-    path('evaluation/delete/<int:eval_id>/',  views.delete_evaluation, name='delete_evaluation'),
+    path(
+        "evaluation/delete/<int:eval_id>/",
+        views.delete_evaluation,
+        name="delete_evaluation",
+    ),
     # Query Evaluation
-    path('evaluate_sections/<str:semester>/', views.evaluate_sections, name='evaluate_sections'),
+    path(
+        "evaluate_sections/<str:semester>/",
+        views.evaluate_sections,
+        name="evaluate_sections",
+    ),
 ]

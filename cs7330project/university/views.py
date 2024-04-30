@@ -15,6 +15,7 @@ from .models import Instructor, Section, Evaluation
 from .forms import EvaluationQueryForm
 from django.urls import reverse
 
+
 # home
 def home(request):
     return render(request, "home.html")
@@ -106,6 +107,27 @@ def degree_details(request):
 
 
 # DegreeCourse
+def add_degreecourse(request):
+    courses = models.Course.objects.all()
+    degrees = models.Degree.objects.all()
+    if request.method == "POST":
+        is_core = request.POST.get("is_core", "False") == "True"
+        course_id = request.POST.get("course_id")
+        degree_id = request.POST.get("degree_id")
+
+        course = get_object_or_404(models.Course, course_id=course_id)
+        degree = get_object_or_404(models.Degree, pk=degree_id)
+
+        models.DegreeCourse.objects.create(
+            is_core=is_core, course=course, degree=degree
+        )
+        return redirect("/degreecourse/")
+    else:
+        return render(
+            request,
+            "degreecourse/add_degreecourse.html",
+            {"courses": courses, "degrees": degrees},
+        )
 
 
 def list_degreecourse(request):
@@ -273,18 +295,22 @@ def list_objective(request):
 
 # Evaluation
 def list_evaluation(request, page=1):
-    evaluation_list = models.Evaluation.objects.all().order_by('-evaluate_id')  # 假设希望最新的评估显示在列表的最前面
+    evaluation_list = models.Evaluation.objects.all().order_by(
+        "-evaluate_id"
+    )  # 假设希望最新的评估显示在列表的最前面
     paginator = Paginator(evaluation_list, 8)  # 每页显示 8 项
 
-    page_number = request.GET.get('page', 1)  # 获取页码参数，默认为第一页
+    page_number = request.GET.get("page", 1)  # 获取页码参数，默认为第一页
     page_obj = paginator.get_page(page_number)
 
     return render(request, "evaluation/evaluation_list.html", {"page_obj": page_obj})
 
+
 def delete_evaluation(request, eval_id):
     evaluation = get_object_or_404(Evaluation, pk=eval_id)
     evaluation.delete()
-    return redirect('list_evaluation')
+    return redirect("list_evaluation")
+
 
 def save_evaluation(request, eval_id=None):
     if eval_id:
@@ -297,38 +323,39 @@ def save_evaluation(request, eval_id=None):
         if form.is_valid():
             # 检查数据库中是否已存在相同记录
             if Evaluation.objects.filter(
-                course=form.cleaned_data['course'],
-                section=form.cleaned_data['section'],
-                method=form.cleaned_data['method'],
-                levelA_stu_num=form.cleaned_data['levelA_stu_num'],
-                levelB_stu_num=form.cleaned_data['levelB_stu_num'],
-                levelC_stu_num=form.cleaned_data['levelC_stu_num'],
-                levelF_stu_num=form.cleaned_data['levelF_stu_num'],
-                improvement_suggestions=form.cleaned_data['improvement_suggestions']
+                course=form.cleaned_data["course"],
+                section=form.cleaned_data["section"],
+                method=form.cleaned_data["method"],
+                levelA_stu_num=form.cleaned_data["levelA_stu_num"],
+                levelB_stu_num=form.cleaned_data["levelB_stu_num"],
+                levelC_stu_num=form.cleaned_data["levelC_stu_num"],
+                levelF_stu_num=form.cleaned_data["levelF_stu_num"],
+                improvement_suggestions=form.cleaned_data["improvement_suggestions"],
             ).exists():
                 messages.error(request, "This evaluation already exists.")
-                return redirect('enter_evaluation')  # 或者重定向到适当的页面
+                return redirect("enter_evaluation")  # 或者重定向到适当的页面
 
             new_eval = form.save()
             messages.success(request, "Evaluation saved successfully!")
-            
+
             # 重新获取所有评估，按 ID 降序排序
-            all_evaluations = Evaluation.objects.all().order_by('-evaluate_id')
-            paginator = Paginator(all_evaluations, 8)  
+            all_evaluations = Evaluation.objects.all().order_by("-evaluate_id")
+            paginator = Paginator(all_evaluations, 8)
 
             # 找出新评估所在的页
             for page_number in range(1, paginator.num_pages + 1):
                 page = paginator.page(page_number)
                 if new_eval in page.object_list:
                     break
-            
+
             # 重定向到新评估所在的评估列表页
-            redirect_url = reverse('list_evaluation', kwargs={'page': page_number})
+            redirect_url = reverse("list_evaluation", kwargs={"page": page_number})
             return redirect(redirect_url)
         else:
             messages.error(request, "Please correct the errors below.")
 
     return render(request, "evaluation/enter_evaluation.html", {"form": form})
+
 
 def enter_evaluation(request):
     search_performed = False
@@ -351,9 +378,7 @@ def enter_evaluation(request):
                 evaluations = [
                     {
                         "section": section,
-                        "evaluation": Evaluation.objects.filter(
-                            section=section
-                        ),
+                        "evaluation": Evaluation.objects.filter(section=section),
                         "is_completed": Evaluation.objects.filter(
                             section=section, is_completed=True
                         ).exists(),
@@ -383,6 +408,7 @@ def enter_evaluation(request):
     }
     return render(request, "evaluation/enter_evaluation.html", context)
 
+
 def edit_evaluation(request, section_id):
     section = get_object_or_404(Section, pk=section_id)
     evaluation = Evaluation.objects.filter(section=section).first()
@@ -393,20 +419,22 @@ def edit_evaluation(request, section_id):
         copy_form = CopyEvaluationForm(request.POST, course=course)
         if form.is_valid() and copy_form.is_valid():
             form.save()
-            if copy_form.cleaned_data.get('copy_to_degrees'):
-                for degree in copy_form.cleaned_data['copy_to_degrees']:
+            if copy_form.cleaned_data.get("copy_to_degrees"):
+                for degree in copy_form.cleaned_data["copy_to_degrees"]:
                     # 创建复制的评估对象
                     Evaluation.objects.create(
                         course=course,
                         section=section,
-                        method=form.cleaned_data['method'],
-                        levelA_stu_num=form.cleaned_data['levelA_stu_num'],
-                        levelB_stu_num=form.cleaned_data['levelB_stu_num'],
-                        levelC_stu_num=form.cleaned_data['levelC_stu_num'],
-                        levelF_stu_num=form.cleaned_data['levelF_stu_num'],
-                        improvement_suggestions=form.cleaned_data['improvement_suggestions'],
+                        method=form.cleaned_data["method"],
+                        levelA_stu_num=form.cleaned_data["levelA_stu_num"],
+                        levelB_stu_num=form.cleaned_data["levelB_stu_num"],
+                        levelC_stu_num=form.cleaned_data["levelC_stu_num"],
+                        levelF_stu_num=form.cleaned_data["levelF_stu_num"],
+                        improvement_suggestions=form.cleaned_data[
+                            "improvement_suggestions"
+                        ],
                         degree_name=degree.name,
-                        degree_level=degree.level
+                        degree_level=degree.level,
                     )
             return redirect("evaluation-list")
     else:
@@ -416,15 +444,16 @@ def edit_evaluation(request, section_id):
     context = {"form": form, "copy_form": copy_form, "section": section}
     return render(request, "evaluation/edit_evaluation.html", context)
 
+
 # Query involving evaluation
 def evaluate_sections(request, semester):
-    form = EvaluationQueryForm(initial={'semester': semester})
+    form = EvaluationQueryForm(initial={"semester": semester})
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = EvaluationQueryForm(request.POST)
         if form.is_valid():
-            semester = form.cleaned_data['semester']
-            percentage = form.cleaned_data.get('percentage', 100)
+            semester = form.cleaned_data["semester"]
+            percentage = form.cleaned_data.get("percentage", 100)
 
     sections = Section.objects.filter(semester=semester)
     sections_data = []
@@ -432,27 +461,44 @@ def evaluate_sections(request, semester):
     for section in sections:
         evaluations = Evaluation.objects.filter(section=section)
         total_students = sum(
-            [eval.levelA_stu_num + eval.levelB_stu_num + eval.levelC_stu_num + eval.levelF_stu_num for eval in
-             evaluations if eval.levelA_stu_num is not None])
-        students_not_f = sum([eval.levelA_stu_num + eval.levelB_stu_num + eval.levelC_stu_num for eval in evaluations if
-                              eval.levelA_stu_num is not None])
-        not_f_percentage = (students_not_f / total_students * 100) if total_students > 0 else 0
+            [
+                eval.levelA_stu_num
+                + eval.levelB_stu_num
+                + eval.levelC_stu_num
+                + eval.levelF_stu_num
+                for eval in evaluations
+                if eval.levelA_stu_num is not None
+            ]
+        )
+        students_not_f = sum(
+            [
+                eval.levelA_stu_num + eval.levelB_stu_num + eval.levelC_stu_num
+                for eval in evaluations
+                if eval.levelA_stu_num is not None
+            ]
+        )
+        not_f_percentage = (
+            (students_not_f / total_students * 100) if total_students > 0 else 0
+        )
 
-        eval_status = 'Fully Entered' if all([eval.improvement_suggestions for eval in
-                                              evaluations]) else 'Partially Entered' if evaluations.exists() else 'Not Entered'
+        eval_status = (
+            "Fully Entered"
+            if all([eval.improvement_suggestions for eval in evaluations])
+            else "Partially Entered" if evaluations.exists() else "Not Entered"
+        )
         if percentage is not None and not_f_percentage < percentage:
             continue
 
-        sections_data.append({
-            'section_id': section.section_id,
-            'course_name': section.course.name,
-            'eval_status': eval_status,
-            'not_f_percentage': f"{not_f_percentage:.2f}%"
-        })
-    return render(request, 'evaluation/section_evaluation_list.html', {
-        'form': form,
-        'sections_data': sections_data,
-        'semester': semester
-    })
-
-
+        sections_data.append(
+            {
+                "section_id": section.section_id,
+                "course_name": section.course.name,
+                "eval_status": eval_status,
+                "not_f_percentage": f"{not_f_percentage:.2f}%",
+            }
+        )
+    return render(
+        request,
+        "evaluation/section_evaluation_list.html",
+        {"form": form, "sections_data": sections_data, "semester": semester},
+    )
