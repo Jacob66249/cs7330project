@@ -110,24 +110,29 @@ def degree_details(request):
 def add_degreecourse(request):
     courses = models.Course.objects.all()
     degrees = models.Degree.objects.all()
+
     if request.method == "POST":
-        is_core = request.POST.get("is_core", "False") == "True"
-        course_id = request.POST.get("course_id")
-        degree_id = request.POST.get("degree_id")
+        try:
+            is_core = request.POST.get("is_core", "False") == "True"
+            course_id = request.POST.get("course_id")
+            degree_id = request.POST.get("degree_id")
 
-        course = get_object_or_404(models.Course, course_id=course_id)
-        degree = get_object_or_404(models.Degree, pk=degree_id)
+            course = get_object_or_404(models.Course, pk=course_id)
+            degree = get_object_or_404(models.Degree, pk=degree_id)
 
-        models.DegreeCourse.objects.create(
-            is_core=is_core, course=course, degree=degree
-        )
-        return redirect("/degreecourse/")
-    else:
-        return render(
-            request,
-            "degreecourse/add_degreecourse.html",
-            {"courses": courses, "degrees": degrees},
-        )
+            models.DegreeCourse.objects.create(
+                is_core=is_core, course=course, degree=degree
+            )
+            messages.success(request, "Degree course added successfully!")
+            return redirect("/degreecourse/")
+        except Exception as e:
+            messages.error(request, f"An error occurred: {e}")
+            return render(request, "error.html", status=500)
+    return render(
+        request,
+        "degreecourse/add_degreecourse.html",
+        {"courses": courses, "degrees": degrees},
+    )
 
 
 def list_degreecourse(request):

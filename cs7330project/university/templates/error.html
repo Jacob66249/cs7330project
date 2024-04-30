@@ -1,0 +1,23 @@
+<!-- templates/error.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Error</title>
+  </head>
+  <body>
+    <h1>An Error Occurred</h1>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>
+      Something went wrong, but we're not sure what. Please try again later.
+    </p>
+    {% endif %}
+    <a href="/">Go back to the homepage</a>
+  </body>
+</html>
