@@ -1,5 +1,5 @@
 from django import forms
-from .models import Course, Section, Instructor, Degree,Evaluation,DegreeCourse
+from .models import Course, Section, Instructor, Degree, Evaluation, DegreeCourse
 
 class EvaluationForm(forms.ModelForm):
     section = forms.ModelChoiceField(queryset=Section.objects.all(), required=True, label="Section", help_text="Select the section for the evaluation")
@@ -99,3 +99,13 @@ class QueryInstructorForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(QueryInstructorForm, self).__init__(*args, **kwargs)
         self.fields["instructor"].label_from_instance = lambda obj: obj.name
+
+
+class EvaluationQueryForm(forms.Form):
+    SEMESTER_CHOICES = [
+        ('Fall', 'Fall'),
+        ('Spring', 'Spring'),
+        ('Summer', 'Summer'),
+    ]
+    semester = forms.ChoiceField(choices=SEMESTER_CHOICES, required=True)
+    percentage = forms.IntegerField(min_value=0, max_value=100, required=False, help_text="Enter a percentage (0-100) to find sections with less than this percentage of F grades.")

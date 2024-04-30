@@ -5,6 +5,15 @@ from django.contrib import messages
 from university import models, forms
 from .models import Instructor, Section, Degree, Evaluation, DegreeCourse
 from .forms import EvaluationForm, SelectInstructorSectionForm, CopyEvaluationForm
+from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
+from university import models, forms
+from .forms import EvaluationForm
+from django.forms import modelformset_factory
+from django.shortcuts import render, get_object_or_404
+from .models import Instructor, Section, Evaluation
+from django.shortcuts import render
+from .forms import EvaluationQueryForm
 
 
 # home
@@ -379,3 +388,42 @@ def edit_evaluation(request, section_id):
     return render(request, "evaluation/edit_evaluation.html", context)
 
 # Query involving evaluation
+def evaluate_sections(request, semester):
+    form = EvaluationQueryForm(initial={'semester': semester})
+
+    if request.method == 'POST':
+        form = EvaluationQueryForm(request.POST)
+        if form.is_valid():
+            semester = form.cleaned_data['semester']
+            percentage = form.cleaned_data.get('percentage', 100)
+
+    sections = Section.objects.filter(semester=semester)
+    sections_data = []
+
+    for section in sections:
+        evaluations = Evaluation.objects.filter(section=section)
+        total_students = sum(
+            [eval.levelA_stu_num + eval.levelB_stu_num + eval.levelC_stu_num + eval.levelF_stu_num for eval in
+             evaluations if eval.levelA_stu_num is not None])
+        students_not_f = sum([eval.levelA_stu_num + eval.levelB_stu_num + eval.levelC_stu_num for eval in evaluations if
+                              eval.levelA_stu_num is not None])
+        not_f_percentage = (students_not_f / total_students * 100) if total_students > 0 else 0
+
+        eval_status = 'Fully Entered' if all([eval.improvement_suggestions for eval in
+                                              evaluations]) else 'Partially Entered' if evaluations.exists() else 'Not Entered'
+        if percentage is not None and not_f_percentage < percentage:
+            continue
+
+        sections_data.append({
+            'section_id': section.section_id,
+            'course_name': section.course.name,
+            'eval_status': eval_status,
+            'not_f_percentage': f"{not_f_percentage:.2f}%"
+        })
+    return render(request, 'evaluation/section_evaluation_list.html', {
+        'form': form,
+        'sections_data': sections_data,
+        'semester': semester
+    })
+
+

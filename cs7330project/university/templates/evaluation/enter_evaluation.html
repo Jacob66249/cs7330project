@@ -24,9 +24,11 @@
                     <th>Semester</th>
                     <th>Year</th>
                     <th>Course</th>
-                    <th>Section ID</th>
-                    <th>Evaluation ID</th>
-                    <th>Actions</th>
+                    <th>levelA_stu_num</th>
+                    <th>levelB_stu_num</th>
+                    <th>levelC_stu_num</th>
+                    <th>levelF_stu_num</th>
+                    <th>levelA_stu_num</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,8 +38,6 @@
                     <td>{{ eval.section.semester }}</td>
                     <td>{{ eval.section.year }}</td>
                     <td>{{ eval.section.course.name }}</td>
-                    <td>{{ eval.section.section_id }}</td>
-                    <td>{{ eval.evaluation|default:"Not Entered" }}</td>
                     <td>{{ eval.is_completed|yesno:"Completed,Not Completed" }}</td>
                     <td>
                         {% if not eval.is_completed %}

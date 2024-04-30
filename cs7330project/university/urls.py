@@ -37,4 +37,6 @@ urlpatterns = [
         name="edit_evaluation",
     ),
     path("evaluation/save/", views.save_evaluation, name="save-evaluation"),
+    # Query Evaluation
+    path('evaluate_sections/<str:semester>/', views.evaluate_sections, name='evaluate_sections'),
 ]

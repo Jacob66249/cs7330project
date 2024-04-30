@@ -1,0 +1,34 @@
+{% extends 'default.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Enter Semester and Percentage to Evaluate Sections</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <h2>Evaluation for Semester: {{ semester }}</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Section ID</th>
+                <th>Course Name</th>
+                <th>Evaluation Status</th>
+                <th>Percentage Not F</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in sections_data %}
+            <tr>
+                <td>{{ data.section_id }}</td>
+                <td>{{ data.course_name }}</td>
+                <td>{{ data.eval_status }}</td>
+                <td>{{ data.not_f_percentage }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'home' %}" class="btn btn-secondary mt-3">Return to Home</a>
+</div>
+{% endblock %}
