@@ -5,7 +5,7 @@ class EvaluationForm(forms.ModelForm):
     
     class Meta:
         model = Evaluation
-        fields = ['method', 'levelA_stu_num', 'levelB_stu_num', 'levelC_stu_num', 'levelF_stu_num', 'improvement_suggestions']
+        fields = ['course','section','method', 'levelA_stu_num', 'levelB_stu_num', 'levelC_stu_num', 'levelF_stu_num', 'improvement_suggestions']
         widgets = {
             'method': forms.TextInput(attrs={'class': 'form-control'}),
             'levelA_stu_num': forms.NumberInput(attrs={'class': 'form-control'}),
@@ -13,7 +13,11 @@ class EvaluationForm(forms.ModelForm):
             'levelC_stu_num': forms.NumberInput(attrs={'class': 'form-control'}),
             'levelF_stu_num': forms.NumberInput(attrs={'class': 'form-control'}),
             'improvement_suggestions': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-        }   
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(EvaluationForm, self).__init__(*args, **kwargs)
+        self.fields['course'].label_from_instance = lambda obj: f"{obj.name} ({obj.course_id})"
 
 class CopyEvaluationForm(forms.Form):
     copy_to_degrees = forms.ModelMultipleChoiceField(
@@ -31,6 +35,7 @@ class CopyEvaluationForm(forms.Form):
             if current_degree_id:
                 degrees = degrees.exclude(id=current_degree_id)
             self.fields['copy_to_degrees'].queryset = degrees
+            self.fields['copy_to_degrees'].label_from_instance = lambda obj: f"{obj.name} ({obj.level})"
 
 class SelectInstructorSectionForm(forms.Form):
     instructor = forms.ModelChoiceField(

@@ -18,6 +18,7 @@
         <th scope="col">Course_name</th>
         <th scope="col">Degree_name</th>
         <th scope="col">Degree_Level</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -34,6 +35,12 @@
         <td>{{ evaluation.course.name }}</td>
         <td>{{ evaluation.degree_name }}</td>
         <td>{{ evaluation.degree_level }}</td>
+        <td> <!-- 添加一个操作列 -->
+          <form method="post" action="{% url 'delete_evaluation' evaluation.evaluate_id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </td>
       </tr>
       {% endfor %}
     </tbody>

@@ -37,6 +37,8 @@ urlpatterns = [
         name="edit_evaluation",
     ),
     path("evaluation/save/", views.save_evaluation, name="save-evaluation"),
+    path("evaluation/page/<int:page>/", views.list_evaluation, name="list_evaluation"),
+    path('evaluation/delete/<int:eval_id>/',  views.delete_evaluation, name='delete_evaluation'),
     # Query Evaluation
     path('evaluate_sections/<str:semester>/', views.evaluate_sections, name='evaluate_sections'),
 ]
