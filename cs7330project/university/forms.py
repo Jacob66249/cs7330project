@@ -2,12 +2,10 @@ from django import forms
 from .models import Course, Section, Instructor, Degree, Evaluation, DegreeCourse
 
 class EvaluationForm(forms.ModelForm):
-    section = forms.ModelChoiceField(queryset=Section.objects.all(), required=True, label="Section", help_text="Select the section for the evaluation")
-    course = forms.ModelChoiceField(queryset=Course.objects.all(), required=True, label="Course", help_text="Select the course for the evaluation")
-
+    
     class Meta:
         model = Evaluation
-        fields = ['course','section','method', 'levelA_stu_num', 'levelB_stu_num', 'levelC_stu_num', 'levelF_stu_num', 'improvement_suggestions']
+        fields = ['method', 'levelA_stu_num', 'levelB_stu_num', 'levelC_stu_num', 'levelF_stu_num', 'improvement_suggestions']
         widgets = {
             'method': forms.TextInput(attrs={'class': 'form-control'}),
             'levelA_stu_num': forms.NumberInput(attrs={'class': 'form-control'}),
@@ -15,11 +13,7 @@ class EvaluationForm(forms.ModelForm):
             'levelC_stu_num': forms.NumberInput(attrs={'class': 'form-control'}),
             'levelF_stu_num': forms.NumberInput(attrs={'class': 'form-control'}),
             'improvement_suggestions': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
-        }
-
-    def __init__(self, *args, **kwargs):
-        super(EvaluationForm, self).__init__(*args, **kwargs)
-        self.fields['course'].label_from_instance = lambda obj: f"{obj.name} ({obj.course_id})"
+        }   
 
 class CopyEvaluationForm(forms.Form):
     copy_to_degrees = forms.ModelMultipleChoiceField(
