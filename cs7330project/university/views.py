@@ -14,6 +14,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Instructor, Section, Evaluation
 from .forms import EvaluationQueryForm
 from django.urls import reverse
+from django.db import IntegrityError
 
 
 # home
@@ -203,10 +204,31 @@ def course_detail(request):
 def add_instructor(request):
     if request.method == "GET":
         return render(request, "instructor/add_instructor.html")
-    Id = request.POST.get("id")
-    Name = request.POST.get("name")
-    models.Instructor.objects.create(id=Id, name=Name)
-    return redirect("/instructor/")
+
+    try:
+        Id = request.POST.get("id")
+        Name = request.POST.get("name")
+
+        # Check whether the same id or name already exists in the database
+        if (
+            models.Instructor.objects.filter(id=Id).exists()
+            or models.Instructor.objects.filter(name=Name).exists()
+        ):
+            messages.error(request, "Duplicate instructor information cannot be added.")
+            return render(request, "error.html", {"id": Id, "name": Name})
+
+        # If it does not exist, create a new instructor and redirect to the instructor list
+        models.Instructor.objects.create(id=Id, name=Name)
+        messages.success(request, "Instructor added successfully!")
+        return redirect("/instructor/")
+    except IntegrityError as ie:
+        messages.error(
+            request, f"Error adding instructor due to integrity constraints: {ie}"
+        )
+        return render(request, "error.html", status=500)
+    except Exception as e:
+        messages.error(request, f"An unexpected error occurred: {e}")
+        return render(request, "error.html", status=500)
 
 
 def list_instructor(request):
@@ -240,25 +262,44 @@ def instructor_details(request):
 # Section
 def add_section(request):
     if request.method == "GET":
-        return render(request, "section/add_section.html")
-    Section_Id = request.POST.get("section_id")
-    Degree_Id = request.POST.get("degree_id")
-    Instructor_Id = request.POST.get("instructor_id")
-    Course_Id = request.POST.get("course_id")
-    Semester = request.POST.get("semester")
-    Year = request.POST.get("year")
-    Enrolled_Stu_Num = request.POST.get("enrolled_stu_num")
+        # Get all course, degree, and faculty information for drop-down menus
+        courses = models.Course.objects.all()
 
-    models.Section.objects.create(
-        degree_id=Degree_Id,
-        section_id=Section_Id,
-        course_id=Course_Id,
-        instructor_id=Instructor_Id,
-        semester=Semester,
-        year=Year,
-        enrolled_stu_num=Enrolled_Stu_Num,
-    )
-    return redirect("/section/")
+        instructors = models.Instructor.objects.all()
+        return render(
+            request,
+            "section/add_section.html",
+            {"courses": courses, "instructors": instructors},
+        )
+    else:
+        # Get the form data from the POST request
+        section_id = request.POST.get("section_id")
+        course_id = request.POST.get("course_id")
+        # degree_id = request.POST.get("degree_id")
+        instructor_id = request.POST.get("instructor_id")
+        semester = request.POST.get("semester")
+        year = request.POST.get("year")
+        enrolled_stu_num = request.POST.get("enrolled_stu_num")
+
+        # Access to relevant courses, degrees, and faculty
+        course = models.Course.objects.get(course_id=course_id)
+        instructor = models.Instructor.objects.get(id=instructor_id)
+
+        # Create a new course section instance and save it to the database
+        new_section = models.Section(
+            section_id=section_id,
+            course=course,
+            instructor=instructor,
+            semester=semester,
+            year=int(year),  # Make sure the year is an integer
+            enrolled_stu_num=int(
+                enrolled_stu_num
+            ),  # Make sure the number of students is a whole number
+        )
+        new_section.save()
+
+        # Redirect to the Course section list page after saving
+        return redirect("/section/")
 
 
 def list_section(request):
@@ -274,18 +315,25 @@ def list_section(request):
 # Objective
 def add_objective(request):
     if request.method == "GET":
-        return render(request, "objective/add_objective.html")
-    Objective_Code = request.POST.get("objective_code")
-    Title = request.POST.get("title")
-    Description = request.POST.get("description")
-    Course_Id = request.POST.get("course_id")
-    models.Objective.objects.create(
-        objective_code=Objective_Code,
-        title=Title,
-        description=Description,
-        course_id=Course_Id,
-    )
-    return redirect("/objective/")
+        courses = models.Course.objects.all()
+        return render(request, "objective/add_objective.html", {"courses": courses})
+    else:
+        objective_code = request.POST.get("objective_code")
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        course_id = request.POST.get("course_id")
+
+        course = models.Course.objects.get(course_id=course_id)
+
+        new_objective = models.Objective(
+            objective_code=objective_code,
+            title=title,
+            description=description,
+            course=course,
+        )
+        new_objective.save()
+
+        return redirect("/objective/")
 
 
 def list_objective(request):

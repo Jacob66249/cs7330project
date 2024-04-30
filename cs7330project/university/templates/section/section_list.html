@@ -16,7 +16,10 @@
         <th scope="col">Year</th>
         <th scope="col">Enrolled_Stu_Num</th>
         <th scope="col">Course_Id</th>
-        <th scope="col">Degree_Id</th>
+        {% comment %}
+        <th scope="col">Degree Name</th>
+        <th scope="col">Degree Level</th>
+        {% endcomment %}
         <th scope="col">Instructor_Id</th>
       </tr>
     </thead>
@@ -28,7 +31,10 @@
         <td>{{ obj.year }}</td>
         <td>{{ obj.enrolled_stu_num }}</td>
         <td>{{ obj.course_id }}</td>
-        <td>{{ obj.degree_id }}</td>
+        {% comment %}
+        <td>{{ obj.degree.name }}</td>
+        <td>{{ obj.degree.level }}</td>
+        {% endcomment %}
         <td>{{ obj.instructor_id }}</td>
       </tr>
       {% endfor %}

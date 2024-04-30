@@ -21,17 +21,6 @@
       </div>
     </div>
     <div class="form-group mb-4">
-      <label class="col-sm-2 control-label">Section_Id</label>
-      <div class="col-sm-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Enter your Section_Id"
-          name="section_id"
-        />
-      </div>
-    </div>
-    <div class="form-group mb-4">
       <label class="col-sm-2 control-label">Enrolled Student Number</label>
       <div class="col-sm-4">
         <input
@@ -43,14 +32,24 @@
       </div>
     </div>
     <div class="form-group mb-4">
-      <label class="col-sm-2 control-label">Course_Id</label>
+      <label class="col-sm-2 control-label">Section_Id</label>
       <div class="col-sm-4">
         <input
           type="text"
           class="form-control"
-          placeholder="Enter Course_Id"
-          name="course_id"
+          placeholder="Enter your Section_Id"
+          name="section_id"
         />
+      </div>
+    </div>
+    <div class="form-group mb-4">
+      <label class="col-sm-2 control-label">Course:</label>
+      <div class="col-sm-5">
+        <select class="form-control" name="course_id">
+          {% for course in courses %}
+          <option value="{{ course.course_id }}">{{ course.name }}</option>
+          {% endfor %}
+        </select>
       </div>
     </div>
     <div class="form-group mb-4">
@@ -65,27 +64,29 @@
       </div>
     </div>
     <div class="form-group mb-4">
-      <label class="col-sm-2 control-label">Instructor_Id</label>
-      <div class="col-sm-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Enter Instructor_Id"
-          name="instructor_id"
-        />
+      <label class="col-sm-2 control-label">Instructor:</label>
+      <div class="col-sm-5">
+        <select class="form-control" name="instructor_id">
+          {% for instructor in instructors %}
+          <option value="{{ instructor.id }}">{{ instructor.name }}</option>
+          {% endfor %}
+        </select>
       </div>
     </div>
+    {% comment %}
     <div class="form-group mb-4">
-      <label class="col-sm-2 control-label">Degree_Id</label>
+      <label class="col-sm-2 control-label">Degree</label>
       <div class="col-sm-4">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Enter Degree_Id"
-          name="degree_id"
-        />
+        <select class="form-control" name="degree_id">
+          {% for degree in degrees %}
+          <option value="{{ degree.id }}">
+            {{ degree.name }} - {{ degree.level }}
+          </option>
+          {% endfor %}
+        </select>
       </div>
     </div>
+    {% endcomment %}
     <div class="form-group mb-4">
       <div class="col-sm-offset-2 col-sm-10 d-flex justify-content-between">
         <button type="submit" class="btn btn-primary mb-2">Add</button>
