@@ -44,9 +44,9 @@ class Section(models.Model):
         ("Fall", "Fall"),
     ]
 
-    degree = models.ForeignKey(
-        Degree, on_delete=models.CASCADE, related_name="sections"
-    )
+    # degree = models.ForeignKey(
+    #     Degree, on_delete=models.CASCADE, related_name="sections"
+    # )
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name="sections"
     )
@@ -61,7 +61,7 @@ class Section(models.Model):
     enrolled_stu_num = models.IntegerField()
 
     class Meta:
-        unique_together = ("course", "section_id", "semester", "year", "degree")
+        unique_together = ("course", "section_id", "semester", "year")
 
 
 class Objective(models.Model):
@@ -69,6 +69,9 @@ class Objective(models.Model):
     title = models.CharField(max_length=120, unique=True)
     description = models.TextField()
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ("course", "objective_code")
 
 
 class Evaluation(models.Model):
@@ -85,7 +88,7 @@ class Evaluation(models.Model):
     degree_level = models.CharField(max_length=50, default="Default Level")
     is_completed = models.BooleanField(default=False)
     improvement_needed = models.BooleanField(default=False)
-    
+
     def save(self, *args, **kwargs):
         if self.section:
             self.degree_name = self.section.degree.name

@@ -275,7 +275,7 @@ def add_section(request):
         # Get the form data from the POST request
         section_id = request.POST.get("section_id")
         course_id = request.POST.get("course_id")
-        # degree_id = request.POST.get("degree_id")
+
         instructor_id = request.POST.get("instructor_id")
         semester = request.POST.get("semester")
         year = request.POST.get("year")
@@ -315,25 +315,18 @@ def list_section(request):
 # Objective
 def add_objective(request):
     if request.method == "GET":
-        courses = models.Course.objects.all()
-        return render(request, "objective/add_objective.html", {"courses": courses})
-    else:
-        objective_code = request.POST.get("objective_code")
-        title = request.POST.get("title")
-        description = request.POST.get("description")
-        course_id = request.POST.get("course_id")
-
-        course = models.Course.objects.get(course_id=course_id)
-
-        new_objective = models.Objective(
-            objective_code=objective_code,
-            title=title,
-            description=description,
-            course=course,
-        )
-        new_objective.save()
-
-        return redirect("/objective/")
+        return render(request, "objective/add_objective.html")
+    course = request.POST.get("course")
+    title = request.POST.get("title")
+    description = request.POST.get("description")
+    objective_code = request.POST.get("objective_code")
+    models.Course.objects.create(
+        course=course,
+        title=title,
+        description=description,
+        objective_code=objective_code,
+    )
+    return redirect("/objective/")
 
 
 def list_objective(request):
