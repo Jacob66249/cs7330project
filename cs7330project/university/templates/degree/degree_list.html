@@ -13,7 +13,7 @@
       <tr>
         <th scope="col">Level</th>
         <th scope="col">Name</th>
-        <th scope="col"></th>
+
       </tr>
     </thead>
     <tbody>
@@ -21,16 +21,7 @@
       <tr>
         <th>{{ obj.level }}</th>
         <td>{{ obj.name }}</td>
-        <td>
-          <a class="btn btn-primary" href="/degree/{{obj.name}}/edit_degree/"
-            >Edit</a
-          >
-          <a
-            class="btn btn-danger"
-            href="{% url 'delete_degree' %}?name={{ obj.name|urlencode }}&level={{ obj.level|urlencode }}"
-            >Delete</a
-          >
-        </td>
+        
       </tr>
       {% endfor %}
     </tbody>

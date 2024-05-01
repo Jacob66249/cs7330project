@@ -44,9 +44,7 @@ class Section(models.Model):
         ("Fall", "Fall"),
     ]
 
-    # degree = models.ForeignKey(
-    #     Degree, on_delete=models.CASCADE, related_name="sections"
-    # )
+    
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name="sections"
     )
