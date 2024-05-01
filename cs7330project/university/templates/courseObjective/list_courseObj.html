@@ -2,26 +2,28 @@
 <div class="container mt-4">
   <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home</a>
   <div class="d-flex justify-content-between align-items-center">
-    <h2 class="mb-0">Objective</h2>
-    <a class="btn btn-primary mb-1" href="{% url 'add_objective' %}"
-      >Add new Objectives</a
+    <h2 class="mb-0">Course Objectives</h2>
+    <a class="btn btn-primary mb-1" href="{% url 'associate_course_Obj' %}"
+      >Associate course to Objective</a
     >
   </div>
 
   <table class="table">
     <thead>
       <tr>
-        <th scope="col">Objective_Code</th>
-        <th scope="col">Title</th>
-        <th scope="col">Description</th>
+        <th scope="col">Course ID</th>
+        <th scope="col">Objective Code</th>
+        <th scope="col">Objective Title</th>
+        <th scope="col">Objective Description</th>
       </tr>
     </thead>
     <tbody>
       {% for obj in page_obj %}
       <tr>
-        <th>{{ obj.objective_code }}</th>
-        <td>{{ obj.title }}</td>
-        <td>{{ obj.description }}</td>
+        <th>{{ obj.course.id }}</th>
+        <td>{{ obj.objective.objective_code }}</td>
+        <td>{{ obj.objective.title }}</td>
+        <td>{{ obj.objective.description }}</td>
       </tr>
       {% endfor %}
     </tbody>
@@ -35,11 +37,9 @@
         >previous</a
       >
       {% endif %}
-
-      <span class="current">
-        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-      </span>
-
+      <span class="current"
+        >Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span
+      >
       {% if page_obj.has_next %}
       <a
         class="btn btn-outline-primary"

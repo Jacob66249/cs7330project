@@ -30,6 +30,13 @@ urlpatterns = [
     # Objective
     path("objective/", views.list_objective, name="list_objective"),
     path("objective/add_objective", views.add_objective, name="add_objective"),
+    # courseObj
+    path("courseObj/", views.list_courseObj, name="list_courseObj"),
+    path(
+        "courseObj/associate_course_Obj",
+        views.associate_objective_to_course,
+        name="associate_course_Obj",
+    ),
     # Evaluation
     path("evaluation/", views.enter_evaluation, name="enter_evaluation"),
     path("evaluation/evaluation_list", views.list_evaluation, name="list_evaluation"),

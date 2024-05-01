@@ -1,47 +1,74 @@
 {% extends "default.html" %}{% block content %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="{% url 'enter_evaluation' %}">Evaluation</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'list_degree' %}">Degree <span class="sr-only"></span></a>
+        <a class="nav-link" href="{% url 'list_degree' %}"
+          >Degree <span class="sr-only"></span
+        ></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'degree_detail' %}">Querying degree<span class="sr-only"></span></a>
+        <a class="nav-link" href="{% url 'degree_detail' %}"
+          >Querydegree<span class="sr-only"></span
+        ></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'list_degreecourse' %}">Degree Course <span class="sr-only"></span></a>
+        <a class="nav-link" href="{% url 'list_degreecourse' %}"
+          >Degree Course <span class="sr-only"></span
+        ></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'list_course' %}">Courses</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'course_detail' %}">Querying course<span class="sr-only"></span></a>
+        <a class="nav-link" href="{% url 'course_detail' %}"
+          >Querycourse<span class="sr-only"></span
+        ></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'list_instructor' %}">Instructors</a>
+        <a class="nav-link" href="{% url 'list_instructor' %}">Instructor</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'instructor_detail' %}">Querying instructor<span class="sr-only"></span></a>
+        <a class="nav-link" href="{% url 'instructor_detail' %}"
+          >Queryinstructor<span class="sr-only"></span
+        ></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'list_section' %}">Sections</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'list_objective' %}">Learning objectives</a>
+        <a class="nav-link" href="{% url 'list_objective' %}"> Objectives</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'evaluate_sections' 'current_semester' %}">Evaluate Sections</a>
+        <a class="nav-link" href="{% url 'list_courseObj' %}"> CourseObj</a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="{% url 'evaluate_sections' 'current_semester' %}"
+          >Evaluate Sections</a
+        >
       </li>
     </ul>
   </div>
 </nav>
-<div class="d-flex justify-content-center align-items-center" style="min-height: 70vh">
+<div
+  class="d-flex justify-content-center align-items-center"
+  style="min-height: 70vh"
+>
   <h1>Welcome to Group 10's Project Homepage</h1>
 </div>
 

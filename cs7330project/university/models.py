@@ -68,10 +68,14 @@ class Objective(models.Model):
     objective_code = models.CharField(max_length=10, primary_key=True)
     title = models.CharField(max_length=120, unique=True)
     description = models.TextField()
+
+
+class CourseObjective(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    objective = models.ForeignKey(Objective, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = ("course", "objective_code")
+        unique_together = ("course", "objective")
 
 
 class Evaluation(models.Model):
