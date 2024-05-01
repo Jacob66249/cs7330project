@@ -277,7 +277,7 @@ def add_instructor(request):
         # Check whether the same id or name already exists in the database
         if (
             models.Instructor.objects.filter(id=Id).exists()
-            or models.Instructor.objects.filter(name=Name).exists()
+            
         ):
             messages.error(request, "Duplicate instructor information cannot be added.")
             return render(request, "error.html", {"id": Id, "name": Name})
