@@ -507,11 +507,11 @@ def enter_evaluation(request):
             if select_form.is_valid():
                 search_performed = True
                 instructor = select_form.cleaned_data["instructor"]
-                degree = select_form.cleaned_data["degree"]
+                objective = select_form.cleaned_data["objective"]
                 semester = select_form.cleaned_data["semester"]
 
                 sections = Section.objects.filter(
-                    instructor=instructor, semester=semester, degree=degree
+                    instructor=instructor, semester=semester, objective=objective
                 )
 
                 evaluations = [
