@@ -382,7 +382,7 @@ def add_objective(request):
         if form.is_valid():
             form.save()
             return redirect(
-                "objective/objective_list.html"
+                "/objective/"
             )  # Redirect to the objective list view or a success page
     else:
         form = ObjectiveForm()
