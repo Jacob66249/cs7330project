@@ -2,12 +2,13 @@
 {% extends "default.html" %}
 {% block content %}
 <div class="container mt-4">
-    <h2>Edit Evaluation for : {{ section.course.course_id }} {{ section.course.name }}</h2>
+    <h2>Edit Evaluation for : {{ section.instructor.name }} {{ section.course.name }} {{ section.section_id }}
+    </h2>
     <form method="post" action="{% url 'save-evaluation' %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <h3>Copy this evaluation to other degrees:</h3>
-        {{ copy_form.as_p }}
+
+
         <button type="submit" class="btn btn-success">Save Evaluation</button>
     </form>
 </div>

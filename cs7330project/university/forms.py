@@ -17,6 +17,7 @@ class EvaluationForm(forms.ModelForm):
         fields = [
             "course",
             "section",
+            "degree",
             "method",
             "levelA_stu_num",
             "levelB_stu_num",
@@ -36,10 +37,13 @@ class EvaluationForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        initial = kwargs.get('initial', {})
+        
+        
         super(EvaluationForm, self).__init__(*args, **kwargs)
-        self.fields["course"].label_from_instance = (
-            lambda obj: f"{obj.name} ({obj.course_id})"
-        )
+        self.fields['course'].label_from_instance = lambda obj: f"{obj.name} ({obj.course_id})"
+        self.fields['degree'].label_from_instance = lambda obj: f"{obj.name} ({obj.level})"
+        self.fields['section'].label_from_instance = lambda obj: f"{obj.section_id}"
 
 
 class CopyEvaluationForm(forms.Form):
@@ -70,18 +74,15 @@ class SelectInstructorSectionForm(forms.Form):
         help_text="Select an instructor",
         required=True,
     )
+
     degree = forms.ModelChoiceField(
         queryset=Degree.objects.all(),
-        label="degree",
-        help_text="Select an degree",
+        label="Degree",
+        help_text="Select the degree",
         required=True,
     )
-    objective = forms.ModelChoiceField(
-        queryset=Objective.objects.all(),
-        label="objective",
-        help_text="Select a objective",
-        required=True,
-    )
+    
+   
     semester = forms.ChoiceField(
         choices=Section.SEMESTER_CHOICES,
         label="Semester",
@@ -92,12 +93,9 @@ class SelectInstructorSectionForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(SelectInstructorSectionForm, self).__init__(*args, **kwargs)
         self.fields["instructor"].label_from_instance = lambda obj: obj.name
-        self.fields["objective"].label_from_instance = (
-            lambda obj: f"{obj.objective_code} ")
-        self.fields["degree"].label_from_instance = (
-            lambda obj: f"{obj.name} ({obj.level})"
-        )
-
+        self.fields["degree"].label_from_instance = lambda obj: f"{obj.name} ({obj.level})"
+        
+       
 
 class DegreeQueryForm(forms.Form):
     degree = forms.ModelChoiceField(

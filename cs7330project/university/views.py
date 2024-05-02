@@ -457,7 +457,14 @@ def save_evaluation(request, eval_id=None):
         evaluation = get_object_or_404(Evaluation, pk=eval_id)
         form = EvaluationForm(request.POST or None, instance=evaluation)
     else:
-        form = EvaluationForm(request.POST or None)
+        if 'selected_course_id' in request.session and 'selected_section_id' in request.session:
+            initial_data = {
+                'course': request.session['selected_course_id'],
+                'section': request.session['selected_section_id'],
+            }
+            form = EvaluationForm(request.POST or None, initial=initial_data)
+        else:
+            form = EvaluationForm(request.POST or None)
 
     if request.method == "POST":
         if form.is_valid():
@@ -465,6 +472,7 @@ def save_evaluation(request, eval_id=None):
             if Evaluation.objects.filter(
                 course=form.cleaned_data["course"],
                 section=form.cleaned_data["section"],
+                degree=form.cleaned_data["degree"],
                 method=form.cleaned_data["method"],
                 levelA_stu_num=form.cleaned_data["levelA_stu_num"],
                 levelB_stu_num=form.cleaned_data["levelB_stu_num"],
@@ -508,12 +516,12 @@ def enter_evaluation(request):
             if select_form.is_valid():
                 search_performed = True
                 instructor = select_form.cleaned_data["instructor"]
+                
                 degree = select_form.cleaned_data["degree"]
-                objective = select_form.cleaned_data["objective"]
                 semester = select_form.cleaned_data["semester"]
 
                 sections = Section.objects.filter(
-                    instructor=instructor, degree=degree, semester=semester, objective=objective
+                    instructor=instructor, course__degreecourse__degree=degree, semester=semester
                 )
 
                 evaluations = [
@@ -529,6 +537,10 @@ def enter_evaluation(request):
                     }
                     for section in sections
                 ]
+
+                if sections:
+                    request.session['selected_course_id'] = sections[0].course.course_id
+                    request.session['selected_section_id'] = sections[0].id
 
         elif "submit_evaluation" in request.POST:
             eval_form = EvaluationForm(request.POST)
