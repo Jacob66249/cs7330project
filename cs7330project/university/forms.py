@@ -70,6 +70,12 @@ class SelectInstructorSectionForm(forms.Form):
         help_text="Select an instructor",
         required=True,
     )
+    degree = forms.ModelChoiceField(
+        queryset=Degree.objects.all(),
+        label="degree",
+        help_text="Select an degree",
+        required=True,
+    )
     objective = forms.ModelChoiceField(
         queryset=Objective.objects.all(),
         label="objective",
@@ -87,7 +93,9 @@ class SelectInstructorSectionForm(forms.Form):
         super(SelectInstructorSectionForm, self).__init__(*args, **kwargs)
         self.fields["instructor"].label_from_instance = lambda obj: obj.name
         self.fields["objective"].label_from_instance = (
-            lambda obj: f"{obj.objective_code} "
+            lambda obj: f"{obj.objective_code} ")
+        self.fields["degree"].label_from_instance = (
+            lambda obj: f"{obj.name} ({obj.level})"
         )
 
 
