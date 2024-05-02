@@ -13,7 +13,7 @@
       <tr>
         <th scope="col">CourseId</th>
         <th scope="col">Name</th>
-        <th scope="col"></th>
+
       </tr>
     </thead>
     <tbody>
@@ -21,18 +21,7 @@
       <tr>
         <th>{{ obj.course_id }}</th>
         <td>{{ obj.name }}</td>
-        <td>
-          <a
-            class="btn btn-primary"
-            href="/course/{{obj.course_id}}/edit_course/"
-            >Edit</a
-          >
-          <a
-            class="btn btn-danger"
-            href="/course/delete_course/?course_id={{obj.course_id}}"
-            >Delete</a
-          >
-        </td>
+        
       </tr>
       {% endfor %}
     </tbody>

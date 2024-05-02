@@ -36,6 +36,8 @@ class Instructor(models.Model):
     id = models.CharField(max_length=20, primary_key=True)
     name = models.CharField(max_length=255)
 
+    
+
 
 class Section(models.Model):
     SEMESTER_CHOICES = [
@@ -44,9 +46,7 @@ class Section(models.Model):
         ("Fall", "Fall"),
     ]
 
-    # degree = models.ForeignKey(
-    #     Degree, on_delete=models.CASCADE, related_name="sections"
-    # )
+    
     course = models.ForeignKey(
         Course, on_delete=models.CASCADE, related_name="sections"
     )

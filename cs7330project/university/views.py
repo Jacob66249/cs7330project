@@ -17,6 +17,7 @@ from .forms import (
     CopyEvaluationForm,
     ObjectiveForm,
     CourseObjectiveForm,
+    DegreeQueryForm
 )
 from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
@@ -28,6 +29,13 @@ from .models import Instructor, Section, Evaluation
 from .forms import EvaluationQueryForm
 from django.urls import reverse
 from django.db import IntegrityError, DatabaseError
+from .utils import (
+    list_courses_by_degree,
+    get_sections_for_degree,
+    list_all_objectives,
+    list_courses_by_objective,
+)
+from datetime import datetime
 
 
 # home
@@ -49,9 +57,16 @@ def list_degree(request):
 def add_degree(request):
     if request.method == "GET":
         return render(request, "degree/add_degree.html")
-    name = request.POST.get("name")
-    level = request.POST.get("level")
-    models.Degree.objects.create(level=level, name=name)
+    
+    try:
+        name = request.POST.get("name")
+        level = request.POST.get("level")
+        models.Degree.objects.create(level=level, name=name)
+    except Exception as e:
+        # Here you can log the exception if you have logging set up
+        # or handle the exception in a way that makes sense for your application.
+        return HttpResponse(f"An error occurred: {str(e)}", status=400)
+
     return redirect("/degree/")
 
 
@@ -74,7 +89,7 @@ def delete_degree(request):
 
 
 def degree_details(request):
-    form = forms.DegreeQueryForm(request.POST or None)
+    form = DegreeQueryForm(request.POST or None)
     context = {"form": form}
 
     if request.method == "POST" and form.is_valid():
@@ -82,28 +97,32 @@ def degree_details(request):
 
         if degree:
             # Fetch courses associated with the degree
-            course_list = models.Course.objects.filter(degreecourse__degree=degree)
+            course_list = list_courses_by_degree(degree.id)
             paginator_courses = Paginator(course_list, 5)  # 5 courses per page
             courses_page_number = request.GET.get("courses_page", 1)
             paginated_courses = paginator_courses.get_page(courses_page_number)
 
             # Fetch sections ordered by year and semester
-            section_list = models.Section.objects.filter().order_by("-year", "semester")
+            current_year = datetime.now().year
+            # Assuming you want to fetch for a particular semester and year range
+            start_semester = "Spring"  # adjust based on your requirement
+            end_semester = "Fall"      # adjust based on your requirement
+            section_list = get_sections_for_degree(degree.id, current_year, current_year, start_semester, end_semester)
             paginator_sections = Paginator(section_list, 5)  # 5 sections per page
             sections_page_number = request.GET.get("sections_page", 1)
             paginated_sections = paginator_sections.get_page(sections_page_number)
 
             # Fetch all objectives
-            objective_list = models.Objective.objects.all()
+            objective_list = list_all_objectives()
             paginator_objectives = Paginator(objective_list, 5)  # 5 objectives per page
             objectives_page_number = request.GET.get("objectives_page", 1)
             paginated_objectives = paginator_objectives.get_page(objectives_page_number)
 
             # Map objectives to courses
             objectives_courses = {}
-            for objective in paginated_objectives:
-                objectives_courses[objective] = models.Course.objects.filter(
-                    objective=objective
+            for objective in objective_list:
+                objectives_courses[objective["objective_code"]] = (
+                    list_courses_by_objective(objective["objective_code"])
                 )
 
             # Update context with paginated data
@@ -258,7 +277,7 @@ def add_instructor(request):
         # Check whether the same id or name already exists in the database
         if (
             models.Instructor.objects.filter(id=Id).exists()
-            or models.Instructor.objects.filter(name=Name).exists()
+            
         ):
             messages.error(request, "Duplicate instructor information cannot be added.")
             return render(request, "error.html", {"id": Id, "name": Name})
@@ -309,16 +328,10 @@ def instructor_details(request):
 def add_section(request):
     try:
         if request.method == "GET":
-            # Get all course, degree, and faculty information for drop-down menus
             courses = models.Course.objects.all()
             instructors = models.Instructor.objects.all()
-            return render(
-                request,
-                "section/add_section.html",
-                {"courses": courses, "instructors": instructors},
-            )
+            return render(request, "section/add_section.html", {"courses": courses, "instructors": instructors})
         else:
-            # Get the form data from the POST request
             section_id = request.POST.get("section_id")
             course_id = request.POST.get("course_id")
             instructor_id = request.POST.get("instructor_id")
@@ -326,42 +339,30 @@ def add_section(request):
             year = request.POST.get("year")
             enrolled_stu_num = request.POST.get("enrolled_stu_num")
 
-            # Access to relevant courses, degrees, and faculty
+            # Validate that enrolled_stu_num is non-negative
+            if int(enrolled_stu_num) < 0:
+                return HttpResponse("Number of enrolled students cannot be negative.", status=400)
+
             course = models.Course.objects.get(course_id=course_id)
             instructor = models.Instructor.objects.get(id=instructor_id)
 
-            # Create a new course section instance and save it to the database
             new_section = models.Section(
                 section_id=section_id,
                 course=course,
                 instructor=instructor,
                 semester=semester,
-                year=int(year),  # Make sure the year is an integer
-                enrolled_stu_num=int(
-                    enrolled_stu_num
-                ),  # Make sure the number of students is a whole number
+                year=int(year),
+                enrolled_stu_num=int(enrolled_stu_num)
             )
             new_section.save()
-
-            # Redirect to the Course section list page after saving
             return redirect("/section/")
     except (IntegrityError, DatabaseError) as e:
-        # Log the error (you can log more details based on your logging setup)
-        print("An error occurred:", e)
-        # Redirect to a generic error page
-        return render(
-            request,
-            "error.html",
-            {"message": "A database error occurred. Please try again."},
-        )
+        return render(request, "error.html", {"message": "A database error occurred. Please try again."})
+    except ValueError as e:
+        # This catches ValueErrors, which might include invalid conversions of 'year' or 'enrolled_stu_num' to integers
+        return HttpResponse("Invalid input for numerical fields.", status=400)
     except Exception as e:
-        # Handle other generic exceptions
-        print("An error occurred:", e)
-        return render(
-            request,
-            "error.html",
-            {"message": "An unexpected error occurred. Please try again."},
-        )
+        return render(request, "error.html", {"message": "An unexpected error occurred. Please try again."})
 
 
 def list_section(request):
