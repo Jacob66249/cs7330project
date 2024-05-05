@@ -1,10 +1,12 @@
 # 🎓 Degree Evaluation - Project Setup
 
 ## 📌 Prerequisites
+- Pip installed
 - Python3 installed 
 - Mysql installed 
-- Django installed 
-- Mysql-Client installed 
+- Django installed `pip3 install django`
+- Mysql-Client installed `pip3 install mysqlclient`
+- Dotenv installed `pip3 install python-dotenv` 
 
 ## 🗄️ Database Setup
 1. **Create a Mysql Database**
